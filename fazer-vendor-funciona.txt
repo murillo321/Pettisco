@@ -1,0 +1,65 @@
+PETTISCO - COMO GERAR O AUTOLOAD DO COMPOSER NO WINDOWS
+======================================================
+
+O projeto usa autoload PSR-4 configurado em composer.json:
+- app\ aponta para a pasta app/
+- core\ aponta para a pasta core/
+
+O Composer gera vendor/autoload.php e os arquivos de autoload dentro de
+vendor/composer. Nao edite esses arquivos gerados manualmente.
+
+PRE-REQUISITOS
+--------------
+1. Instale o PHP para Windows. Para este projeto, pode ser usado o PHP do
+   XAMPP, normalmente em C:\xampp\php\php.exe.
+2. Instale o Composer pelo instalador oficial Composer-Setup.exe. Durante a
+   instalacao, selecione o php.exe correto, por exemplo C:\xampp\php\php.exe.
+3. Feche e reabra os terminais depois da instalacao para atualizar o PATH.
+4. Confira a instalacao com:
+
+   php -v
+   composer --version
+
+METODO 1: TERMINAL DO WINDOWS
+-----------------------------
+Abra PowerShell, Prompt de Comando ou o terminal integrado do VS Code e rode:
+
+   cd C:\xampp\htdocs\Pettisco
+   composer install
+   composer dump-autoload
+   php -r "require 'vendor/autoload.php'; echo 'autoload OK', PHP_EOL;"
+
+Se o projeto estiver em outro local, substitua o caminho do comando cd pela
+pasta que contem composer.json.
+
+O comando composer install instala as dependencias declaradas no projeto e
+gera o autoload. composer dump-autoload regenera os arquivos de autoload apos
+alteracoes no composer.json. O ultimo comando confirma que o autoload pode ser
+carregado.
+
+METODO 2: INTERFACE GRAFICA DO PHPSTORM
+--------------------------------------
+1. Abra a pasta Pettisco no PhpStorm.
+2. Abra File > Settings > PHP e selecione o interpretador do XAMPP, por
+   exemplo C:\xampp\php\php.exe.
+3. Em File > Settings > PHP > Composer, configure o executavel do Composer
+   instalado pelo Composer-Setup.exe. Se necessario, informe o caminho de
+   composer.phar e o interpretador PHP configurado no passo anterior.
+4. Abra Tools > Composer e escolha Install para instalar as dependencias e
+   gerar vendor/autoload.php.
+5. Depois de alterar composer.json, use Tools > Composer > Dump Autoloader para
+   regenerar o autoload.
+6. Se a versao do PhpStorm apresentar os comandos em outro menu, procure as
+   acoes Composer Install e Dump Autoloader na busca de acoes do IDE.
+
+COMANDOS DE PUBLICACAO EXECUTADOS NESTA SESSAO
+----------------------------------------------
+Estes foram os comandos usados para adicionar e publicar os arquivos da
+estrutura MVC na branch main:
+
+   git add .
+   git commit -m "estrutura das páginas no modelo mvc"
+   git push origin main
+
+O Composer nao foi executado nesta sessao: a pasta vendor ja existia. Para
+recriar ou atualizar o autoload no Windows, use um dos dois metodos acima.
