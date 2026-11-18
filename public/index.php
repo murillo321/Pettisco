@@ -1,7 +1,8 @@
 <?php
 
-require '../bootstrap.php';
+use Core\Router;
 
-$controler = new Controler();
+require_once __DIR__ . '../../vendor/autoload.php';
 
-$controler->run();
+$router = new Router();
+$router->run();

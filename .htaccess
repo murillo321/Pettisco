@@ -1,0 +1,4 @@
+RewriteEngine On
+RewriteBase /pettisco/public/
+RewriteCond %{REQUEST_FILENEAME} !-f
+RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]

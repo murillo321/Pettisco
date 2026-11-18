@@ -1,2 +1,0 @@
-# Pettisco
-Sistema de PetShop
