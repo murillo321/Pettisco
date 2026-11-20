@@ -15,58 +15,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../front-end/css/main.css">
+    <link rel="stylesheet" href="../../front-end/css/pages/cadastro.css">
+    <link rel="shortcut icon" href="../../front-end/img/logos/favicon.ico" type="image/x-icon"> 
     <title>Pettisco - Cadastro</title>
 </head>
 <body>
+    <main class="cadastro">
+        <section class="painel-esquerdo">
+            <section class="conteudo">
+                <img src="../../front-end/img/logos/logo-fundo-escuro-deitada.png" class="logo" alt="logo pettisco, cachorro com um chapéu">
+                <span class="linha-destaque" aria-hidden="true"></span>
+                <h2 class="titulo-esquerdo">Crie sua conta na <span class="destaque">Pettisco</span></h2>
+                <p>Cadastre-se e aproveite muitos benefícios para você cuidar do seu pet da melhor maneira!</p>
 
-    <form action="#" method="POST" name="cadastro">
+                <ul class="beneficios">
+                    <li>
 
-        <label for="nome">Nome Completo:</label>
-        <input type="text" id="nome" name="nome" required>
+                        <div><h3>Compre com facilidade</h3><p>Encontre os melhores produtos para o seu pet.</p></div>
+                    </li>
+                    <li>
 
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
+                        <div><h3>Ofertas exclusivas</h3><p>Promoções e benefícios especiais para clientes cadastrados.</p></div>
+                    </li>
+                    <li>
 
-        <label for="cpf">CPF:</label>
-        <input type="text" id="cpf" name="cpf" required>
-        <p id="alerta-cpf"></p>
+                        <div><h3>Tudo para o bem-estar do seu pet</h3><p>Qualidade, variedade e cuidado em um só lugar.</p></div>
+                    </li>
+                </ul>
+            </section>
+        </section>
 
-        <section class="field">
-      <label for="senha">Senha</label>
-      
-      <section class="input-wrap">
-        <input type="password" id="senha" name="senha" placeholder="Mínimo 8 caracteres" required minlength="8" />
-        <button type="button" class="eye" data-target="senha" aria-label="Mostrar senha">👁</button>
-      </section>
+        <section class="painel-direito">
+            <img src="../../front-end/img/logos/logo-fundo-escuro-deitada.png" class="logo logo-mobile" alt="Pettisco">
+            <h1 class="titulo-direito">Criar conta</h1>
+            <p class="introducao-cadastro">Cadastre-se na Pettisco e tenha acesso a ofertas exclusivas, compras rápidas e muito mais para o seu pet.</p>
+            <span class="linha-destaque" aria-hidden="true"></span>
+            <form action="#" method="POST" name="cadastro">
 
-      <ul class="rules" id="rules">
-        <li id="quantidade">8+ caracteres</li>
-        <li id="maiuscula">Uma letra maiúscula</li>
-        <li id="numeros">Um número</li>
-        <li id="especiais">Um caractere especial</li>
-      </ul>
+                <div class="campo-cadastro">
+                <label for="nome">Nome Completo:</label>
+                <input type="text" id="nome" name="nome" required>
+                </div>
 
-    </section>
-    <section class="field">
-      <label for="confirmar-senha">Confirmar senha</label>
-      <section>
-        <input type="password" id="confirmar-senha" name="confirmar-senha" placeholder="Repita a senha" required />
-        <button type="button" class="eye" data-target="senha" aria-label="Mostrar senha">👁</button>
-      </section>
-      <p id="alerta-senha"></p>
-    </section>
-    <p>já possui uma conta? <a href="login.php">Entre aqui!</a></p>
+                <section class="email-cpf">
+                    <div class="campo-cadastro">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                    </div>
 
-        <input type="submit" value="Cadastrar" name="submit">
-    </form>
+                    <div class="campo-cadastro">
+                    <label for="cpf">CPF:</label>
+                    <input type="text" id="cpf" name="cpf" required>
+                    <p id="alerta-cpf"></p>
+                    </div>
+                </section>
+                <section class="field">
+            <label for="senha">Senha</label>
+            
+            <section class="input-wrap">
+                <input type="password" id="senha" name="senha" placeholder="Mínimo 8 caracteres" required minlength="8" />
+                <button type="button" class="eye" data-target="senha" aria-label="Mostrar senha">👁</button>
+            </section>
 
-    <dialog id="modal-erro-senha" aria-labelledby="titulo-erro-senha">
-        <h2 id="titulo-erro-senha">Não foi possível cadastrar</h2>
-        <p id="mensagem-erro-senha"></p>
-        <form method="dialog">
-            <button type="submit">Entendi</button>
-        </form>
-    </dialog>
+            <div class="requisitos-senha">
+            <p>Sua senha deve conter:</p>
+            <ul class="rules" id="rules">
+                <li id="quantidade">8+ caracteres</li>
+                <li id="maiuscula">Uma letra maiúscula</li>
+                <li id="numeros">Um número</li>
+                <li id="especiais">Um caractere especial</li>
+            </ul>
+            </div>
+
+                </section>
+                <section class="field">
+                <label for="confirmar-senha">Confirmar senha</label>
+                <section>
+                    <input type="password" id="confirmar-senha" name="confirmar-senha" placeholder="Repita a senha" required />
+                    <button type="button" class="eye" data-target="senha" aria-label="Mostrar senha">👁</button>
+                </section>
+                <p id="alerta-senha"></p>
+                </section>
+                <p>já possui uma conta? <a href="login.php">Entre aqui!</a></p>
+
+                <input type="submit" value="Cadastrar" name="submit">
+            </form>
+        </section>
+
+        <dialog id="modal-erro-senha" aria-labelledby="titulo-erro-senha">
+            <h2 id="titulo-erro-senha">Não foi possível cadastrar</h2>
+            <p id="mensagem-erro-senha"></p>
+            <form method="dialog">
+                <button type="submit">Entendi</button>
+            </form>
+        </dialog>
+</main>
 
 
     <?php

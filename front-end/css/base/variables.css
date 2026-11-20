@@ -1,0 +1,37 @@
+:root {
+    --azul: #0B3C49;
+    --laranja: #Ff9f1c;
+    --outrolaranja: #ff7b00;
+    --beje: #F6F2EB;
+    --outrobeje: #E8DFD1;
+    --cinza: #252525;
+    --branco: #fff;
+
+    /* Tipografia: tamanhos próximos compartilham a mesma escala. */
+    --tamanho-titulo: 36px;
+    --tamanho-titulo-mobile: 30px;
+    --tamanho-subtitulo: 18px;
+    --tamanho-texto: 16px;
+    --tamanho-texto-pequeno: 14px;
+
+    /* Campos e elementos visuais */
+    --altura-input: 40px;
+    --altura-botao: 44px;
+    --tamanho-icone: 36px;
+
+    --altura-logo: 110px;
+    --altura-logo-mobile: 85px;
+
+    --largura-modal: 440px;
+
+    /* Espaçamentos e arredondamentos */
+    --espaco-minimo: 6px;
+    --espaco-pequeno: 8px;
+    --espaco-medio: 12px;
+    --espaco-padrao: 16px;
+    --espaco-grande: 24px;
+    --espaco-painel: 30px;
+    --raio-pequeno: 8px;
+    --raio-padrao: 12px;
+    --raio-grande: 16px;
+}
