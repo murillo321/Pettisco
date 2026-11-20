@@ -1,4 +1,4 @@
--- MariaDB dump 10.19  Distrib 10.4.32-MariaDB, for Win64 (AMD64)
+-- MariaDB dump 10.19  Distrib 10.4.32-MariaDB, for Linux (x86_64)
 --
 -- Host: localhost    Database: pettisco
 -- ------------------------------------------------------
@@ -33,8 +33,8 @@ CREATE TABLE `agendamentos` (
   PRIMARY KEY (`id_agendamento`),
   UNIQUE KEY `uk_agendamento_horario` (`data`,`horario`),
   KEY `fk_agendamento_user` (`id_user`),
-  KEY `fk_agendamento_pet` (`id_pet`),
   KEY `fk_agendamento_servico` (`id_servico`),
+  KEY `fk_agendamento_pet` (`id_pet`),
   CONSTRAINT `fk_agendamento_pet` FOREIGN KEY (`id_pet`) REFERENCES `pet` (`id_pet`),
   CONSTRAINT `fk_agendamento_servico` FOREIGN KEY (`id_servico`) REFERENCES `servico` (`id_servico`),
   CONSTRAINT `fk_agendamento_user` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`)
@@ -51,6 +51,75 @@ LOCK TABLES `agendamentos` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `categoria`
+--
+
+DROP TABLE IF EXISTS `categoria`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `categoria` (
+  `id_categoria` int(11) NOT NULL AUTO_INCREMENT,
+  `identificador` varchar(120) NOT NULL,
+  `nome_categoria` varchar(120) NOT NULL,
+  `descricao` text DEFAULT NULL,
+  `id_especie` int(11) DEFAULT NULL,
+  `categoria_pai_id` int(11) DEFAULT NULL,
+  `ordem_exibicao` int(11) NOT NULL DEFAULT 0,
+  `ativo` tinyint(1) NOT NULL DEFAULT 1,
+  PRIMARY KEY (`id_categoria`),
+  UNIQUE KEY `uk_categoria_identificador` (`identificador`),
+  KEY `fk_categoria_especie` (`id_especie`),
+  KEY `fk_categoria_pai` (`categoria_pai_id`),
+  CONSTRAINT `fk_categoria_especie` FOREIGN KEY (`id_especie`) REFERENCES `especie` (`id_especie`),
+  CONSTRAINT `fk_categoria_pai` FOREIGN KEY (`categoria_pai_id`) REFERENCES `categoria` (`id_categoria`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `categoria`
+--
+
+LOCK TABLES `categoria` WRITE;
+/*!40000 ALTER TABLE `categoria` DISABLE KEYS */;
+/*!40000 ALTER TABLE `categoria` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `convite_adm`
+--
+
+DROP TABLE IF EXISTS `convite_adm`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `convite_adm` (
+  `id_convite` int(11) NOT NULL AUTO_INCREMENT,
+  `codigo_hash` char(64) NOT NULL,
+  `cpf_convidado` varchar(14) NOT NULL,
+  `id_adm_criador` int(11) NOT NULL,
+  `id_adm_cadastrado` int(11) DEFAULT NULL,
+  `criado_em` timestamp NOT NULL DEFAULT current_timestamp(),
+  `expira_em` datetime NOT NULL,
+  `usado_em` datetime DEFAULT NULL,
+  `revogado_em` datetime DEFAULT NULL,
+  PRIMARY KEY (`id_convite`),
+  UNIQUE KEY `uk_convite_codigo` (`codigo_hash`),
+  KEY `fk_convite_criador` (`id_adm_criador`),
+  KEY `fk_convite_cadastrado` (`id_adm_cadastrado`),
+  CONSTRAINT `fk_convite_cadastrado` FOREIGN KEY (`id_adm_cadastrado`) REFERENCES `user` (`id_user`),
+  CONSTRAINT `fk_convite_criador` FOREIGN KEY (`id_adm_criador`) REFERENCES `user` (`id_user`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `convite_adm`
+--
+
+LOCK TABLES `convite_adm` WRITE;
+/*!40000 ALTER TABLE `convite_adm` DISABLE KEYS */;
+/*!40000 ALTER TABLE `convite_adm` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `especie`
 --
 
@@ -59,7 +128,7 @@ DROP TABLE IF EXISTS `especie`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `especie` (
   `id_especie` int(11) NOT NULL AUTO_INCREMENT,
-  `nome_especie` varchar(255) DEFAULT NULL,
+  `nome_especie` varchar(255) NOT NULL,
   PRIMARY KEY (`id_especie`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -120,7 +189,9 @@ CREATE TABLE `pedido` (
   `data_compra` date DEFAULT NULL,
   `status` tinyint(1) DEFAULT 1,
   `valor_total` decimal(9,2) DEFAULT NULL,
-  PRIMARY KEY (`id_pedido`)
+  PRIMARY KEY (`id_pedido`),
+  KEY `fk_pedido_user` (`id_user`),
+  CONSTRAINT `fk_pedido_user` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -149,12 +220,12 @@ CREATE TABLE `pet` (
   `foto_pet_url` varchar(255) NOT NULL,
   `peso` decimal(5,2) DEFAULT NULL,
   PRIMARY KEY (`id_pet`),
-  KEY `fk_pet_especie` (`id_especie`),
-  KEY `id_raca` (`id_raca`),
   KEY `fk_pet_user` (`id_user`),
+  KEY `fk_pet_especie` (`id_especie`),
+  KEY `fk_pet_raca` (`id_raca`),
   CONSTRAINT `fk_pet_especie` FOREIGN KEY (`id_especie`) REFERENCES `especie` (`id_especie`),
-  CONSTRAINT `fk_pet_user` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`),
-  CONSTRAINT `id_raca` FOREIGN KEY (`id_raca`) REFERENCES `raca` (`id_raca`)
+  CONSTRAINT `fk_pet_raca` FOREIGN KEY (`id_raca`) REFERENCES `raca` (`id_raca`),
+  CONSTRAINT `fk_pet_user` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -178,7 +249,7 @@ CREATE TABLE `porte` (
   `id_porte` int(11) NOT NULL AUTO_INCREMENT,
   `nome_porte` varchar(50) NOT NULL,
   PRIMARY KEY (`id_porte`),
-  UNIQUE KEY `nome_porte` (`nome_porte`)
+  UNIQUE KEY `uk_nome_porte` (`nome_porte`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -188,7 +259,7 @@ CREATE TABLE `porte` (
 
 LOCK TABLES `porte` WRITE;
 /*!40000 ALTER TABLE `porte` DISABLE KEYS */;
-INSERT INTO `porte` VALUES (3,'Grande'),(2,'M?dio'),(1,'Pequeno');
+INSERT INTO `porte` VALUES (3,'Grande'),(2,'Médio'),(1,'Pequeno');
 /*!40000 ALTER TABLE `porte` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -206,9 +277,14 @@ CREATE TABLE `produtos` (
   `quantidade` int(11) NOT NULL DEFAULT 0,
   `preco` decimal(10,2) NOT NULL,
   `tipo` varchar(100) NOT NULL,
+  `id_categoria` int(11) DEFAULT NULL,
   `img_url` varchar(255) DEFAULT NULL,
   `ativo` tinyint(1) NOT NULL DEFAULT 1,
-  PRIMARY KEY (`id_produto`)
+  PRIMARY KEY (`id_produto`),
+  KEY `fk_produto_categoria` (`id_categoria`),
+  CONSTRAINT `fk_produto_categoria` FOREIGN KEY (`id_categoria`) REFERENCES `categoria` (`id_categoria`),
+  CONSTRAINT `chk_produto_quantidade` CHECK (`quantidade` >= 0),
+  CONSTRAINT `chk_produto_preco` CHECK (`preco` >= 0)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -234,10 +310,10 @@ CREATE TABLE `raca` (
   `id_especie` int(11) DEFAULT NULL,
   `id_porte` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_raca`),
-  KEY `id_especie` (`id_especie`),
+  KEY `fk_raca_especie` (`id_especie`),
   KEY `fk_raca_porte` (`id_porte`),
-  CONSTRAINT `fk_raca_porte` FOREIGN KEY (`id_porte`) REFERENCES `porte` (`id_porte`),
-  CONSTRAINT `id_especie` FOREIGN KEY (`id_especie`) REFERENCES `especie` (`id_especie`)
+  CONSTRAINT `fk_raca_especie` FOREIGN KEY (`id_especie`) REFERENCES `especie` (`id_especie`),
+  CONSTRAINT `fk_raca_porte` FOREIGN KEY (`id_porte`) REFERENCES `porte` (`id_porte`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -247,7 +323,7 @@ CREATE TABLE `raca` (
 
 LOCK TABLES `raca` WRITE;
 /*!40000 ALTER TABLE `raca` DISABLE KEYS */;
-INSERT INTO `raca` VALUES (1,'Shih-tzu',1,1),(2,'Pinscher',1,1),(3,'Poodle',1,2),(4,'Labrador',1,3),(5,'Golden Retriever',1,3),(6,'Bulldog Franc?s',1,2),(7,'Persa',2,1),(8,'Siam?s',2,1),(9,'Maine Coon',2,3),(10,'Coelho An?o',3,1);
+INSERT INTO `raca` VALUES (1,'Shih-tzu',1,1),(2,'Pinscher',1,1),(3,'Poodle',1,2),(4,'Labrador',1,3),(5,'Golden Retriever',1,3),(6,'Bulldog Francês',1,2),(7,'Persa',2,1),(8,'Siamês',2,1),(9,'Maine Coon',2,3),(10,'Coelho Anão',3,1);
 /*!40000 ALTER TABLE `raca` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -286,11 +362,13 @@ CREATE TABLE `user` (
   `id_user` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(50) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `senha` varchar(64) NOT NULL,
+  `cpf` varchar(14) NOT NULL,
+  `senha` varchar(255) NOT NULL,
   `foto_url` varchar(255) DEFAULT NULL,
-  `adm` tinyint(1) DEFAULT 0,
+  `adm` tinyint(1) NOT NULL DEFAULT 0,
   `criado_em` timestamp NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`id_user`)
+  PRIMARY KEY (`id_user`),
+  UNIQUE KEY `cpf` (`cpf`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -341,4 +419,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-11-09 14:40:17
+-- Dump completed on 2026-11-20  8:27:05
