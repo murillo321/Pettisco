@@ -61,10 +61,6 @@ table {
     border-spacing: 0;
 }
 
-dialog {
-    margin: auto;
-}
-
 [hidden] {
     display: none !important;
 }

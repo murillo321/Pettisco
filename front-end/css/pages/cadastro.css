@@ -36,52 +36,45 @@ body {
     mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath fill='white' d='M0 0H87.5C84.5 10 82.5 20 82.5 30C82.5 46 87.5 61 87.5 77C87.5 86 86.5 94 84.5 100H0Z'/%3E%3C/svg%3E");
     mask-repeat: no-repeat;
     mask-size: 100% 100%;
+    padding-right: calc(var(--espaco-painel) * 2);
 }
-
 .painel-direito {
     display: flex;
     flex-direction: column;
 }
-
 .painel-direito, .painel-esquerdo {
     padding: var(--espaco-painel);
 }
-
 .email-cpf {
     color: black;
 }
-/* Complementos visuais do cadastro */
 .painel-esquerdo .conteudo {
     margin: 0 auto;
     padding-right: var(--espaco-painel);
 }
-
 .painel-esquerdo .logo {
     object-fit: contain;
     object-position: left center;
     max-width: 100%;
 }
-
 .linha-destaque {
     display: block;
     width: 68px;
     height: 6px;
     border-radius: var(--raio-pequeno);
     background-color: var(--outrolaranja);
-    margin: var(--espaco-padrao) 0 var(--espaco-grande);
+    margin-bottom: 20px;
+    margin-top: -10px;
 }
-
 .titulo-esquerdo {
     margin: 0 0 var(--espaco-grande);
     line-height: 1.12;
 }
-
 .conteudo > p {
     font-size: var(--tamanho-texto);
     line-height: 1.5;
     margin: 0;
 }
-
 .beneficios {
     list-style: none;
     padding: 0;
@@ -89,64 +82,49 @@ body {
     display: grid;
     gap: var(--espaco-grande);
 }
-
 .beneficios li {
     display: flex;
     align-items: center;
     gap: var(--espaco-grande);
 }
-
-
-
 .beneficios h3 {
     margin: 0 0 var(--espaco-minimo);
     font-size: var(--tamanho-texto);
     line-height: 1.25;
 }
-
 .beneficios p {
     margin: 0;
     font-size: var(--tamanho-texto);
     line-height: 1.5;
 }
-
-
-
-
 .painel-direito {
     justify-content: center;
     padding-right: calc(var(--espaco-painel) * 2);
 }
-
 .titulo-direito {
     margin: 0 0 var(--espaco-medio);
     line-height: 1.15;
 }
-
 .introducao-cadastro {
     margin: 0;
     font-size: var(--tamanho-texto);
     line-height: 1.4;
 }
-
 .painel-direito form[name="cadastro"] {
     display: flex;
     flex-direction: column;
     gap: var(--espaco-grande);
     width: 100%;
 }
-
 .campo-cadastro, .field {
     min-width: 0;
 }
-
 .painel-direito label {
     display: block;
     font-size: var(--tamanho-subtitulo);
     font-weight: 700;
     margin-bottom: var(--espaco-pequeno);
 }
-
 .painel-direito input:not([type="submit"]) {
     width: 100%;
     min-width: 0;
@@ -157,27 +135,22 @@ body {
     background-color: var(--branco);
     color: var(--cinza);
 }
-
 .painel-direito input::placeholder {
     color: var(--cinza);
     opacity: 0.7;
 }
-
 .painel-direito .email-cpf {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--espaco-grande);
     color: var(--cinza);
 }
-
 .field > section {
     position: relative;
 }
-
 .field > section input {
     padding-right: var(--altura-botao);
 }
-
 .eye {
     position: absolute;
     right: 4px;
@@ -190,11 +163,9 @@ body {
     color: var(--azul);
     font-size: var(--tamanho-subtitulo);
 }
-
 .eye:hover {
     background-color: var(--beje);
 }
-
 .requisitos-senha {
     margin-top: var(--espaco-padrao);
     padding: var(--espaco-padrao);
@@ -265,29 +236,6 @@ body {
 .cadastro :focus-visible {
     outline: 3px solid var(--laranja);
     outline-offset: 3px;
-}
-
-#modal-erro-senha {
-    max-width: min(var(--largura-modal), calc(100% - var(--espaco-padrao) * 2));
-    padding: var(--espaco-painel);
-    border: 2px solid var(--azul);
-    border-radius: var(--raio-grande);
-    background-color: var(--beje);
-    color: var(--cinza);
-    line-height: 1.5;
-}
-
-#modal-erro-senha h2 {
-    margin-top: 0;
-}
-
-#modal-erro-senha button {
-    padding: var(--espaco-medio) var(--espaco-grande);
-    border: 0;
-    border-radius: var(--raio-pequeno);
-    background-color: var(--laranja);
-    color: var(--cinza);
-    font-weight: 700;
 }
 
 @media (max-width: 1100px) {

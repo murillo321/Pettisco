@@ -7,8 +7,43 @@
     }
 
     require_once('../funcoes/conexao.php');
+    
+    if (isset($_POST['submit'])) {
+        $nome = $_POST['nome'];
+        $email = $_POST['email'];
+        $cpf = $_POST['cpf'];
+        $senha = $_POST['senha'];
 
-?>
+        
+        if (!empty($nome) && !empty($email) && !empty($cpf) && !empty($senha)){
+            $sqlVerificar = $pdo->prepare("SELECT * FROM user WHERE email=:email or cpf=:cpf");
+            $sqlVerificar->execute(['email' => $email, 'cpf' => $cpf]); 
+            $verificacao = $sqlVerificar->fetch();
+            if(!empty($verificacao)){
+                echo '<script>alert("Usuário já cadastrado!")</script>';
+            } else {
+            $sqlDados = 'insert into user (username, email, cpf, senha) values (:nome, :email, :cpf, :senhahash)';
+            $inserirDados = $pdo->prepare($sqlDados);
+            $hash = password_hash($senha, PASSWORD_DEFAULT);
+            
+            $inserirDados->execute(array(
+                ':nome' => $nome,
+                ':email' => $email,
+                ':cpf' => $cpf,
+                ':senhahash' => $hash
+            ));
+
+            $_SESSION['cadastro_concluido'] = true;
+            $_SESSION['id_user'] = $pdo->lastInsertId();
+            header("location:home.php");
+        }} else {
+            echo '</script>alert("Preencha todos os campos!")</script>';
+        }
+    }
+    
+
+
+    ?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -49,7 +84,6 @@
         <section class="painel-direito">
             <img src="../../front-end/img/logos/logo-fundo-escuro-deitada.png" class="logo logo-mobile" alt="Pettisco">
             <h1 class="titulo-direito">Criar conta</h1>
-            <p class="introducao-cadastro">Cadastre-se na Pettisco e tenha acesso a ofertas exclusivas, compras rápidas e muito mais para o seu pet.</p>
             <span class="linha-destaque" aria-hidden="true"></span>
             <form action="#" method="POST" name="cadastro">
 
@@ -113,43 +147,7 @@
 </main>
 
 
-    <?php
-    if (isset($_POST['submit'])) {
-        $nome = $_POST['nome'];
-        $email = $_POST['email'];
-        $cpf = $_POST['cpf'];
-        $senha = $_POST['senha'];
-
-        
-        if (!empty($nome) && !empty($email) && !empty($cpf) && !empty($senha)){
-            $sqlVerificar = $pdo->prepare("SELECT * FROM user WHERE email=:email or cpf=:cpf");
-            $sqlVerificar->execute(['email' => $email, 'cpf' => $cpf]); 
-            $verificacao = $sqlVerificar->fetch();
-            if(!empty($verificacao)){
-                echo '<script>alert("Usuário já cadastrado!")</script>';
-            } else {
-            $sqlDados = 'insert into user (username, email, cpf, senha) values (:nome, :email, :cpf, :senhahash)';
-            $inserirDados = $pdo->prepare($sqlDados);
-            $hash = password_hash($senha, PASSWORD_DEFAULT);
-            
-            $inserirDados->execute(array(
-                ':nome' => $nome,
-                ':email' => $email,
-                ':cpf' => $cpf,
-                ':senhahash' => $hash
-            ));
-
-            $_SESSION['cadastro_concluido'] = true;
-            $_SESSION['id_user'] = $pdo->lastInsertId();
-            header("location:home.php");
-        }} else {
-            echo '</script>alert("Preencha todos os campos!")</script>';
-        }
-    }
     
-
-
-    ?>
 
     <script src="../../front-end/js/validacao-cadastro.js"></script>
 
