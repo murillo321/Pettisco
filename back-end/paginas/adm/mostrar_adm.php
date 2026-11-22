@@ -87,9 +87,8 @@
 </head>
 <body>
     <section class="separar">
-        <button id="abrir_modal" onclick="abrir_modal()">Gerar código de convite</button>
+        <button id="abrir_modal" onclick="abrir_modal()" class="gerar-convite">Gerar código de convite</button>
         <form name="filtro">
-            <label for="ordem">Selecione o filtro</label>
             <select name="ordem" id="ordem">
                 <option value="nome_asc">Nome (A - Z)</option>
                 <option value="nome_desc">Nome (Z - A)</option>
@@ -100,13 +99,20 @@
     </section>
     <dialog id="modal1">
         <form name="cadastro_adm" action="#" method="POST">
-            <label for="cpf">Cpf</label>
-            <input type="text" name="cpf" id="cpf" maxlength="14">
-            <label for="expira">Data de expiração</label>
-            <input type="datetime-local" name="expira" id="expira" min="<?= date('Y-m-d\TH:i') ?>">
-            <input type="submit" value="Gerar convite" name="convite">
+            <p>Gerar convite</p>
+            <section class="separar2">
+                <label for="cpf">Cpf</label>
+                <input type="text" name="cpf" id="cpf" maxlength="14" placeholder="000.000.000-00">
+            </section>
+            <section class="separar2">
+                <label for="expira">Data de expiração</label>
+                <input type="datetime-local" name="expira" id="expira" min="<?= date('Y-m-d\TH:i') ?>">
+            </section>
+            <section class="separar">
+                <input type="submit" value="Gerar convite" name="convite">
+                <button id="fechar_modal" onclick="fechar_modal()">Cancelar</button>
+            </section>
         </form>
-        <button id="fechar_modal" onclick="fechar_modal()">Cancelar</button>
     </dialog>
     <dialog id="modal2">
         <p>Token gerado é:<?php echo $token; ?></p>

@@ -7,6 +7,7 @@ body{
     border-radius: var(--raio-padrao);
     border: 1px solid ;
     width: 75%;
+    margin-top: 35px;
 }
 .painel p{
     margin-right: var(--espaco-padrao);
@@ -33,4 +34,29 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
+}
+.separar{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+.separar2{
+    display: flex;
+    flex-direction: column;
+
+}
+.gerar-convite{
+    background-color: var(--laranja);
+    border: 0px;
+    color: var(--branco);
+    width: 200px;
+    height: 35px;
+    border-radius: var(--raio-pequeno);
+    font-weight: bold;
+}
+#modal1[open]{
+    display: flex;
+    width: var(--largura-modal);
 }
