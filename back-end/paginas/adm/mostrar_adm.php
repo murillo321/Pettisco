@@ -10,7 +10,7 @@
     */
     $id_user = 3;
     verificaradm($pdo, $id_user);
-    $sql = $pdo->query('select * from user where adm = true;');
+    $sql = $pdo->query('select id_user, username, cpf, email, foto_url from user where adm = true and cpf != "676.767.676-67";');
     $adm = $sql->fetchAll();
 
     if(isset($_POST['convite'])){
@@ -82,9 +82,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pettisco - Adm</title>
+    <link rel="stylesheet" href="../../../front-end/css/main.css">
+    <link rel="stylesheet" href="../../../front-end/css/pages/mostrar_adm.css">
 </head>
 <body>
-    <button id="abrir_modal" onclick="abrir_modal()">Gerar código de convite</button>
+    <section class="separar">
+        <button id="abrir_modal" onclick="abrir_modal()">Gerar código de convite</button>
+        <form name="filtro">
+            <label for="ordem">Selecione o filtro</label>
+            <select name="ordem" id="ordem">
+                <option value="nome_asc">Nome (A - Z)</option>
+                <option value="nome_desc">Nome (Z - A)</option>
+                <option value="data_asc">Mais antigos</option>
+                <option value="data_desc">Mais recentes</option>
+            </select>
+        </form>
+    </section>
     <dialog id="modal1">
         <form name="cadastro_adm" action="#" method="POST">
             <label for="cpf">Cpf</label>
@@ -99,17 +112,22 @@
         <p>Token gerado é:<?php echo $token; ?></p>
         <button id="fechar_modal" onclick="fechar_modal2()">Fechar</button>
     </dialog>
-    <section>
-        <?php
-            foreach ($adm as $adm){
-                if($adm['cpf'] == '676.767.676-67'){
-
+    <section class="centralizar">
+        <section class="painel" id="lista_adm">
+            <section class="header-perfil">
+                <p>Foto</p>
+                <p>Nome</p>
+                <p>Email</p>
+                <p>Deletar</p>
+            </section>
+            <?php
+                foreach ($adm as $adm){
+                    echo '<section class="perfil">';
+                        echo '<img src="../../../front-end/img/'.$adm['foto_url'].'" class="foto-perfil"><p class="nome">'.$adm['username'].'</p> <p class="cpf">'.$adm['cpf'].'</p><p class="email">'.$adm['email'].'</p> <a href="?id='.$adm['id_user'].'" onclick="return confirm(\'Deseja mesmo remover de administrador o usuário: '.$adm['username'].'?\')" class="excluir-adm">Excluir adm</a></br>';
+                    echo '</section>';
                 }
-                else{
-                        echo 'Nome: '.$adm['username'].' Cpf: '.$adm['cpf'].' <a href="?id='.$adm['id_user'].'" onclick="return confirm(\'Deseja mesmo remover de administrador o usuário: '.$adm['username'].'?\')">Excluir adm</a></br>';
-                }
-            }
-        ?>
+            ?>
+        </section>
     </section>
     <a href="convites.php">Ver convites</a>
     <script src="../../../front-end/js/adm.js"></script>

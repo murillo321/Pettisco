@@ -32,7 +32,7 @@
             }
         } ?>
     </section>
-    <a href="adm.php">Voltar para página de administradores</a>
+    <a href="mostrar_adm.php">Voltar para página de administradores</a>
     <script src="../../../front-end/js/adm.js"></script>
 </body>
 </html>

@@ -1,0 +1,8 @@
+/* TEM QUE SUBIR TODAS OS ARQUIVOS DE CSS AQUI MENOS OS ARQUIVOS ESPECÍFICOS PARA CADA PÁGINA NÉ*/
+
+@import url(../css/base/global.css);
+@import url(../css/base/variables.css);
+
+@import url(../css/layout/footer.css);
+@import url(../css/layout/header.css);
+@import url(../css/layout/modal.css);
