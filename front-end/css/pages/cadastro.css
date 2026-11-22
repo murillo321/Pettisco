@@ -139,6 +139,8 @@ body {
     color: var(--cinza);
     opacity: 0.7;
 }
+
+
 .painel-direito .email-cpf {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -238,6 +240,26 @@ body {
     outline-offset: 3px;
 }
 
+
+/*LUCIDE ICONES*/
+
+.user-lucide {
+    position: absolute; 
+    left: 12px; 
+    top: 50%; 
+    transform: translateY(-50%);
+}
+
+.input{ 
+    position: relative;
+}
+
+
+
+
+
+
+
 @media (max-width: 1100px) {
     .titulo-esquerdo, .titulo-direito {
         font-size: var(--tamanho-titulo);
@@ -335,6 +357,10 @@ body {
 
 .field > section input {
     padding-right: var(--altura-botao);
+}
+
+.painel-direito .input input:not([type="submit"]) {
+    padding-left: 40px;
 }
 
 .eye {
