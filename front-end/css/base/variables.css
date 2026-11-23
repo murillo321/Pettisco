@@ -8,14 +8,16 @@
     --branco: #fff;
 
     /* Tipografia: tamanhos próximos compartilham a mesma escala. */
-    --tamanho-titulo: 36px;
+    --tamanho-titulo: 60px;
     --tamanho-titulo-mobile: 30px;
-    --tamanho-subtitulo: 18px;
+    --tamanho-boas-vindas: 76px;
+    --tamanho-boas-vindas-mobile: 42px;
+    --tamanho-subtitulo: 25px;
     --tamanho-texto: 16px;
     --tamanho-texto-pequeno: 14px;
 
     /* Campos e elementos visuais */
-    --altura-input: 40px;
+    --altura-input: 55px;
     --altura-botao: 44px;
     --tamanho-icone: 36px;
 

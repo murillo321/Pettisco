@@ -108,42 +108,59 @@
 
 </head>
 <body>
-    <main class="cadastro">
+    <main class="login">
         <section class="painel-esquerdo">
             <section class="conteudo">
                 <img src="../../front-end/img/logos/logo-fundo-escuro-deitada.png" class="logo" alt="logo pettisco, cachorro com um chapéu">
-                <h2 class="titulo-esquerdo">Crie sua conta na <span class="destaque">Pettisco</span></h2>
-                <p>Cadastre-se e aproveite muitos benefícios para você cuidar do seu pet da melhor maneira!</p>
-
-                <ul class="beneficios">
-                    <li>
-
-                        <section><h3>Compre com facilidade</h3><p>Encontre os melhores produtos para o seu pet.</p></section>
-                    </li>
-                    <li>
-
-                        <section><h3>Ofertas exclusivas</h3><p>Promoções e benefícios especiais para clientes cadastrados.</p></section>
-                    </li>
-                    <li>
-
-                        <section><h3>Tudo para o bem-estar do seu pet</h3><p>Qualidade, variedade e cuidado em um só lugar.</p></section>
-                    </li>
-                </ul>
+                <h2 class="titulo-esquerdo">Bem-vindo<br>de <span class="destaque">volta!</span></h2>
+                <p>Acesse sua conta e continue cuidando do seu pet.</p>
             </section>
         </section>
 
         <section class="painel-direito">
+            <header class="login-cabecalho">
+                <h1>Entrar na <span class="destaque">Pettisco</span></h1>
+                <p>Acesse sua conta para continuar.</p>
+            </header>
             <form action="#" method="POST" name="login">
-                <label for="emailoucpf">Digite seu Email ou CPF</label>
-                <input type="text" id="emailoucpf" name="emailoucpf" data-email-ou-cpf="true" required>
-                <label for="senhaouhash">Digite a sua senha</label>
-                <input type="password" name="senhaouhash">
-
+                <div class="campo-login">
+                    <label for="emailoucpf">E-mail ou CPF</label>
+                    <div class="campo-com-icone">
+                        <i data-lucide="user-round" class="user-lucide" aria-hidden="true"></i>
+                        <input type="text" id="emailoucpf" name="emailoucpf" aria-describedby="alerta-cpf" data-email-ou-cpf="true" placeholder="Digite seu e-mail ou CPF" required>
+                    </div>
+                    <p id="alerta-cpf" aria-live="polite"></p>
+                </div>
+                <div class="campo-login">
+                    <label for="senhaouhash">Senha</label>
+                    <div class="campo-com-icone">
+                        <i data-lucide="lock-keyhole" class="user-lucide" aria-hidden="true"></i>
+                        <input type="password" id="senhaouhash" name="senhaouhash" placeholder="Digite sua senha" required>
+                        <button type="button" class="eye" aria-label="Mostrar senha" aria-controls="senhaouhash">
+                            <i data-lucide="eye" aria-hidden="true"></i>
+                            <i data-lucide="eye-off" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
                 <input type="submit" name="entrar" value="Entrar">
+                <div class="login-divisor"><span>ou</span></div>
+                <p class="login-cadastro">Ainda não tem uma conta? <a href="cadastro.php">Cadastre-se</a></p>
             </form>
-            <p>Ainda não tem uma conta? <a href="cadastro.php">crie uma!</a></p>
         </section>
     </main>
     <script src="../../front-end/js/validar-cpf.js"></script>
+    <script>
+        lucide.createIcons();
+
+        const senha = document.getElementById("senhaouhash");
+        const alternarSenha = document.querySelector(".eye");
+
+        alternarSenha.addEventListener("click", function () {
+            const mostrarSenha = senha.type === "password";
+            senha.type = mostrarSenha ? "text" : "password";
+            alternarSenha.classList.toggle("is-visible", mostrarSenha);
+            alternarSenha.setAttribute("aria-label", mostrarSenha ? "Ocultar senha" : "Mostrar senha");
+        });
+    </script>
 </body>
 </html>

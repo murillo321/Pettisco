@@ -5,7 +5,7 @@
         header("location:cadastro.php");
         exit();
     }
-    $id_user = $_SESSION['id_user'];
+    $idUser = $_SESSION['id_user'];
 
 ?>
 
@@ -18,8 +18,9 @@
 </head>
 <body>
     <h1>Bem-vindo à página inicial!</h1>
-    <p>Você está logado como usuário com ID: <?php echo $id_user; ?></p>
+    <p>Você está logado como usuário com ID: <?php echo $idUser; ?></p>
     <a href="../funcoes/logout.php">Sair</a>
+    <a href="produtos.php">Página de produtos</a>
     
 </body>
 </html>

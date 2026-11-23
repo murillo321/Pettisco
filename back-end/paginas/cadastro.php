@@ -150,7 +150,7 @@
                 <label for="nome">Nome Completo:</label>
                 <section class="input">
                     <i data-lucide="user" class="user-lucide" aria-hidden="true"></i>
-                    <input type="text" id="nome" name="nome" value="<?= htmlspecialchars($nomeAdm ?? '')?>" required placeholder="Digite seu nome completo">
+                    <input type="text" id="nome" name="nome" required placeholder="Digite seu nome completo">
                 </section>
                 </section>
 
@@ -159,7 +159,7 @@
                     <label for="email">Email:</label>
                     <section class="input">
                         <i data-lucide="mail" class="user-lucide" aria-hidden="true"></i>
-                        <input type="email" id="email" name="email" required placeholder="Digite seu email" value="<?= htmlspecialchars($emailAdm ?? '')?>">
+                        <input type="email" id="email" name="email" required placeholder="Digite seu email">
                     </section>
                     </section>
 
@@ -167,7 +167,7 @@
                     <label for="cpf">CPF:</label>
                     <section class="input">
                         <i data-lucide="id-card" class="user-lucide" aria-hidden="true"></i>
-                        <input type="text" id="cpf" name="cpf" required placeholder="Digite seu CPF" value="<?= htmlspecialchars($cpfAdm ?? '')?>">
+                        <input type="text" id="cpf" name="cpf" required placeholder="Digite seu CPF" value="<?= htmlspecialchars($cpfAdm ?? '')?>" <?= !empty($cpfAdm) ? 'readonly' : '' ?>>
                     </section>
                     <p id="alerta-cpf"></p>
                     </section>
@@ -175,7 +175,7 @@
                 <section class="field">
             <label for="senha">Senha</label>
             
-            <section class="input-wrap">
+            <section class="input-wrap">    
                 <section class="input">
                         <i data-lucide="lock" class="user-lucide" aria-hidden="true"></i>
                         <input type="password" id="senha" name="senha" placeholder="Mínimo 8 caracteres" required minlength="8" />
@@ -197,16 +197,18 @@
                 <section class="field">
                 <label for="confirmar-senha">Confirmar senha</label>
                 <section>
+                
+                <section class="input-wrap">
                     <section class="input">
                         <i data-lucide="lock" class="user-lucide" aria-hidden="true"></i>
-                        <input type="password" id="senha" name="senha" placeholder="Repita a sua senha" required minlength="8" />
+                        <input type="password" id="confirmar-senha" name="confirmar-senha" placeholder="Repita a sua senha" required minlength="8" />
                     </section>
-                    <button type="button" class="eye" data-target="senha" aria-label="Mostrar senha"><i data-lucide="eye" aria-hidden="true"></i></button>
+                    <button type="button" class="eye" data-target="confirmar-senha" aria-label="Mostrar senha"><i data-lucide="eye" aria-hidden="true"></i></button>
+                </section>
                 </section>
                 <p id="alerta-senha"></p>
                 </section>
                 <p>já possui uma conta? <a href="login.php">Entre aqui!</a></p>
-
                 <input type="submit" value="Cadastrar" name="submit">
             </form>
         </section>
@@ -226,8 +228,35 @@
     <script src="../../front-end/js/validar-cpf.js"></script>
     <script src="../../front-end/js/validacao-cadastro.js"></script>
     <script>
+    (function () {
+            const campoCpf = document.getElementById("cpf");
+
+            campoCpf.addEventListener("input", function () {
+                let valorCpf = this.value.replace(/\D/g, "").slice(0, 11);
+
+                if (valorCpf.length > 9) {
+                    valorCpf = valorCpf.replace(
+                        /^(\d{3})(\d{3})(\d{3})(\d{1,2})$/,
+                        "$1.$2.$3-$4"
+                    );
+                } else if (valorCpf.length > 6) {
+                    valorCpf = valorCpf.replace(
+                        /^(\d{3})(\d{3})(\d{1,3})$/,
+                        "$1.$2.$3"
+                    );
+                } else if (valorCpf.length > 3) {
+                    valorCpf = valorCpf.replace(
+                        /^(\d{3})(\d{1,3})$/,
+                        "$1.$2"
+                    );
+                }
+
+                this.value = valorCpf;
+            });
+        })();
+        
         lucide.createIcons();
-    </script>   
+    </script>
 
 
 </body>
