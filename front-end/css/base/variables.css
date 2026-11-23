@@ -3,9 +3,11 @@
     --laranja: #Ff9f1c;
     --outrolaranja: #ff7b00;
     --beje: #F6F2EB;
+    --beje-claro: #fffcf6;
     --outrobeje: #E8DFD1;
     --cinza: #252525;
     --branco: #fff;
+    --cinza-claro: #dadada;
 
     /* Tipografia: tamanhos próximos compartilham a mesma escala. */
     --tamanho-titulo: 60px;
