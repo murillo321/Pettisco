@@ -1,0 +1,312 @@
+body {
+    background-color: var(--beje);
+    color: var(--cinza);
+    line-height: 1.1;
+}
+
+.cadastro {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.painel-esquerdo,
+.painel-direito {
+    padding: var(--espaco-painel);
+}
+
+.painel-esquerdo {
+    background-color: var(--azul);
+    color: var(--branco);
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath fill='white' d='M0 0H87.5C84.5 10 82.5 20 82.5 30C82.5 46 87.5 61 87.5 77C87.5 86 86.5 94 84.5 100H0Z'/%3E%3C/svg%3E");
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath fill='white' d='M0 0H87.5C84.5 10 82.5 20 82.5 30C82.5 46 87.5 61 87.5 77C87.5 86 86.5 94 84.5 100H0Z'/%3E%3C/svg%3E");
+    mask-repeat: no-repeat;
+    mask-size: 100% 100%;
+    padding-right: 60px;
+}
+
+.painel-direito {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-right: 60px;
+}
+
+.conteudo {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.logo {
+    width: auto;
+    height: var(--altura-logo);
+}
+
+.painel-esquerdo .logo {
+    max-width: 100%;
+    object-fit: contain;
+    object-position: left center;
+}
+
+.titulo-esquerdo,
+.titulo-direito {
+    font-size: var(--tamanho-titulo);
+}
+
+.titulo-esquerdo {
+    margin: 0 0 var(--espaco-grande);
+    line-height: 1.12;
+}
+
+.titulo-direito {
+    margin: 0 0 var(--espaco-medio);
+    line-height: 1.15;
+}
+
+.destaque {
+    color: var(--outrolaranja);
+}
+
+.conteudo > p,
+.beneficios p {
+    font-size: var(--tamanho-texto);
+    line-height: 1.5;
+}
+
+.conteudo > p {
+    margin: 0;
+}
+
+.beneficios {
+    display: grid;
+    gap: var(--espaco-grande);
+    margin: var(--espaco-painel) 0;
+    padding: 0;
+    list-style: none;
+}
+
+.beneficios li {
+    display: flex;
+    align-items: center;
+    gap: var(--espaco-grande);
+}
+
+.beneficios h3 {
+    margin: 0 0 var(--espaco-minimo);
+    font-size: var(--tamanho-subtitulo);
+    line-height: 1.25;
+}
+
+.beneficios p {
+    margin: 0;
+}
+
+.linha-destaque {
+    display: block;
+    width: 68px;
+    height: 6px;
+    margin: -10px 0 20px;
+    border-radius: var(--raio-pequeno);
+    background-color: var(--outrolaranja);
+}
+
+.painel-direito form[name="cadastro"] {
+    display: flex;
+    flex-direction: column;
+    gap: var(--espaco-padrao);
+    width: 100%;
+}
+
+.campo-cadastro,
+.field {
+    min-width: 0;
+}
+
+.painel-direito label {
+    display: block;
+    margin-bottom: var(--espaco-minimo);
+    font-size: var(--tamanho-texto-pequeno);
+    font-weight: 700;
+}
+
+.painel-direito input {
+    width: 100%;
+    min-width: 0;
+    height: var(--altura-input);
+    padding: var(--espaco-pequeno) var(--espaco-medio);
+    border: 1px solid var(--outrobeje);
+    border-radius: var(--raio-pequeno);
+    background-color: var(--branco);
+    color: var(--cinza);
+    font-size: var(--tamanho-texto-pequeno);
+}
+
+.painel-direito input::placeholder {
+    color: var(--cinza);
+    opacity: 0.7;
+}
+
+.email-cpf {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--espaco-grande);
+    color: var(--cinza);
+}
+
+.input,
+.input-wrap {
+    position: relative;
+}
+
+.input input {
+    padding-left: 40px;
+}
+
+.input-wrap input {
+    padding-right: var(--altura-botao);
+}
+
+.user-lucide {
+    position: absolute;
+    top: 50%;
+    left: var(--espaco-padrao);
+    transform: translateY(-50%);
+}
+
+.eye {
+    position: absolute;
+    top: 50%;
+    right: 2px;
+    width: var(--tamanho-icone);
+    height: var(--tamanho-icone);
+    transform: translateY(-50%);
+    border: 0;
+    border-radius: var(--raio-pequeno);
+    background-color: var(--branco);
+    color: var(--azul);
+    font-size: var(--tamanho-subtitulo);
+}
+
+.eye:hover {
+    background-color: var(--beje);
+}
+
+.requisitos-senha {
+    margin-top: var(--espaco-medio);
+    padding: var(--espaco-medio);
+    border-radius: var(--raio-padrao);
+    background-color: var(--outrobeje);
+}
+
+.requisitos-senha > p {
+    margin: 0 0 var(--espaco-medio);
+    color: var(--azul);
+    font-weight: 700;
+}
+
+.rules {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--espaco-pequeno);
+    margin: 0;
+    padding: 0;
+    font-size: var(--tamanho-texto-pequeno);
+    line-height: 1.4;
+    list-style: none;
+}
+
+#alerta-cpf,
+#alerta-senha {
+    margin: var(--espaco-pequeno) 0 0;
+    font-size: var(--tamanho-texto-pequeno);
+    line-height: 1.4;
+}
+
+#alerta-cpf:empty,
+#alerta-senha:empty {
+    display: none;
+}
+
+.painel-direito input[type="submit"] {
+    height: auto;
+    min-height: var(--altura-botao);
+    margin-top: var(--espaco-pequeno);
+    padding: var(--espaco-medio) var(--espaco-padrao);
+    border: 0;
+    border-radius: var(--raio-pequeno);
+    background-color: var(--outrolaranja);
+    font-size: var(--tamanho-subtitulo);
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.painel-direito input[type="submit"]:hover {
+    background-color: var(--laranja);
+}
+
+.cadastro :focus-visible {
+    outline: 3px solid var(--laranja);
+    outline-offset: 3px;
+}
+
+.logo-mobile {
+    display: none;
+}
+
+@media (max-width: 1100px) {
+    .painel-esquerdo .conteudo {
+        width: 90%;
+        margin-left: 0;
+    }
+
+    .painel-direito {
+        padding-right: var(--espaco-painel);
+    }
+
+    .beneficios li {
+        gap: var(--espaco-medio);
+    }
+}
+
+@media (max-width: 760px) {
+    .cadastro {
+        grid-template-columns: 1fr;
+    }
+
+    .painel-esquerdo {
+        display: none;
+    }
+
+    .painel-direito {
+        justify-content: flex-start;
+        padding: var(--espaco-painel) var(--espaco-grande);
+    }
+
+    .titulo-esquerdo,
+    .titulo-direito {
+        font-size: var(--tamanho-titulo-mobile);
+    }
+
+    .painel-direito input {
+        font-size: var(--tamanho-texto);
+    }
+
+    .logo-mobile {
+        display: block;
+        align-self: center;
+        height: var(--altura-logo-mobile);
+        max-width: 100%;
+        margin-bottom: var(--espaco-grande);
+        object-fit: contain;
+    }
+}
+
+@media (max-width: 420px) {
+    .email-cpf,
+    .rules {
+        grid-template-columns: 1fr;
+    }
+}

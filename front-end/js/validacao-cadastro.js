@@ -1,7 +1,5 @@
 const senha = document.getElementById("senha");
 const confirmarSenha = document.getElementById("confirmar-senha");
-const cpf = document.getElementById("cpf");
-const alertaCPF = document.getElementById("alerta-cpf");
 
 const quantidade = document.getElementById("quantidade");
 const maiuscula = document.getElementById("maiuscula");
@@ -101,10 +99,6 @@ const validarEmail = (email) => {
     return formatoValido.test(email.trim());
 };
 
-cpf.addEventListener("input", function () {
-    validarCPF(cpf.value);
-});
-
 // VALIDAÇÃO EM TEMPO REAL
 senha.addEventListener("input", function () {
     verificarFormulario();
@@ -128,21 +122,15 @@ formulario.addEventListener("submit", function (evento) {
     const senhaValida = validarSenha();
     const senhasIguais = validarConfirmacao();
     const emailValido = validarEmail(email.value);
-    const cpfValido = validarCPF(cpf.value);
 
-    if (!senhaValida || !senhasIguais || !emailValido || !cpfValido) {
+    if (!senhaValida || !senhasIguais || !emailValido) {
         evento.preventDefault();
         mensagemErroSenha.textContent = !senhaValida
             ? "A senha não atende aos requisitos indicados."
             : !senhasIguais
                 ? "As senhas não coincidem."
-                : !emailValido
-                    ? "O email informado é inválido."
-                    : "O CPF informado é inválido.";
+                : "O email informado é inválido.";
         modalErroSenha.showModal();
-        if (!cpfValido) {
-            cpf.focus();
-        }
     }
 });
 
@@ -171,39 +159,3 @@ botoesOlho.forEach(function (botao, indice) {
 });
 
 verificarFormulario();
-
-
-function validarCPF(valorCPF) {
-    const cpfNumerico = valorCPF.replace(/\D/g, "");
-
-    if (cpfNumerico.length !== 11 || /^(\d)\1{10}$/.test(cpfNumerico)) {
-        alertaCPF.textContent = valorCPF.length === 0
-            ? ""
-            : "Informe um CPF válido com 11 dígitos.";
-        alertaCPF.style.color = "red";
-        return false;
-    }
-
-    const calcularDigitoVerificador = (digitos) => {
-        let soma = 0;
-
-        for (let i = 0; i < digitos.length; i++) {
-            soma += Number(digitos[i]) * (digitos.length + 1 - i);
-        }
-
-        const resto = soma % 11;
-        return resto < 2 ? 0 : 11 - resto;
-    };
-
-    const primeiroDigito = calcularDigitoVerificador(cpfNumerico.slice(0, 9));
-    const segundoDigito = calcularDigitoVerificador(
-        cpfNumerico.slice(0, 9) + primeiroDigito
-    );
-    const cpfValido =
-        cpfNumerico === cpfNumerico.slice(0, 9) + primeiroDigito + segundoDigito;
-
-    alertaCPF.textContent = cpfValido ? "CPF válido." : "CPF inválido, digite novamente.";
-    alertaCPF.style.color = cpfValido ? "green" : "red";
-
-    return cpfValido;
-}

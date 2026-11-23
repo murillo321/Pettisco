@@ -1,0 +1,62 @@
+body{
+    background-color: var(--beje);
+}
+.painel{
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--raio-padrao);
+    border: 1px solid ;
+    width: 75%;
+    margin-top: 35px;
+}
+.painel p{
+    margin-right: var(--espaco-padrao);
+}
+.header-perfil{
+    display: flex;
+    color: var(--beje);
+    background-color: var(--azul);
+    border-top-left-radius: var(--raio-padrao);
+    border-top-right-radius: var(--raio-padrao);
+    height: 70px;
+}
+.perfil{
+    display: flex;
+    border-top: 1px solid;
+    background-color: var(--beje-claro);
+    height: 60px;
+}
+.foto-perfil{
+    border-radius: 50%;
+    height: 70%;
+}
+.centralizar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.separar{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+.separar2{
+    display: flex;
+    flex-direction: column;
+
+}
+.gerar-convite{
+    background-color: var(--laranja);
+    border: 0px;
+    color: var(--branco);
+    width: 200px;
+    height: 35px;
+    border-radius: var(--raio-pequeno);
+    font-weight: bold;
+}
+#modal1[open]{
+    display: flex;
+    width: var(--largura-modal);
+}
