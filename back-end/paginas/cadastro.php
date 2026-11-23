@@ -94,7 +94,8 @@
 
             $_SESSION['cadastro_concluido'] = true;
             $_SESSION['id_user'] = $idUser;
-            header("location:home.php");
+            $_SESSION['adm'] = true;
+            header("location:/adm/adm.php");
         }} else {
             echo '</script>alert("Preencha todos os campos!")</script>';
         }

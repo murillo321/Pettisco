@@ -32,14 +32,19 @@
                 exit();
             }        
             if (filter_var($emailOuCpf, FILTER_VALIDATE_EMAIL)) {
-                $verificarEmail = $pdo->prepare('SELECT email, senha, id_user FROM user WHERE email = :email');
+                $verificarEmail = $pdo->prepare('SELECT email, senha, id_user, adm FROM user WHERE email = :email');
                 $verificarEmail->execute(['email' => $emailOuCpf]);
                 $dadosEmail = $verificarEmail->fetch(PDO::FETCH_ASSOC);
                 if ($dadosEmail) {
                     if (password_verify($senhaOuHash, $dadosEmail['senha'])) {
                         $_SESSION['cadastro_concluido'] = true;
-                        $_SESSION['id_user'] = $dadosEmail['id_user'];    
-                        header('location: home.php');
+                        $_SESSION['id_user'] = $dadosEmail['id_user'];
+                        if($dadosEmail['adm'] == true) {
+                            $_SESSION['adm'] == true;
+                            header('location:'.__DIR__.'/adm/adm.php');
+                        } else {    
+                            header('location:home.php');
+                        }
                         exit();
                     }
                 }
@@ -65,13 +70,18 @@
                             $cpfFormatado .= '-';
                         }
                     }
-                    $verificarCpf = $pdo->prepare('SELECT cpf, senha, id_user FROM user WHERE cpf = :cpf');
+                    $verificarCpf = $pdo->prepare('SELECT cpf, senha, id_user, adm FROM user WHERE cpf = :cpf');
                     $verificarCpf->execute(['cpf' => $cpfFormatado]);
                     $dadosCpf = $verificarCpf->fetch(PDO::FETCH_ASSOC);
                     if ($dadosCpf && password_verify($senhaOuHash, $dadosCpf['senha'])) {
                         $_SESSION['cadastro_concluido'] = true;
                         $_SESSION['id_user'] = $dadosCpf['id_user'];
-                        header('Location: home.php');
+                        if($dadosCpf['adm'] == true) {
+                            $_SESSION['adm'] == true;
+                            header('Location:/adm/adm.php');
+                        } else{
+                            header('Location: home.php');
+                        }
                         exit();
                     } else {
                         $verificarCpfConvidado = $pdo->prepare('SELECT id_convite, codigo_hash FROM convite_adm WHERE cpf_convidado = :cpf AND expira_em > CURRENT_TIMESTAMP AND usado_em IS NULL AND revogado_em IS NULL');
