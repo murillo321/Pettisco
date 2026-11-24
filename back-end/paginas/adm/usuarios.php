@@ -1,6 +1,10 @@
 <?php
-    //session_start();
-    //verificar id do user e se é adm
+    /*session_start();
+    
+    if($_SESSION['adm'] ==  false){
+     header('location:funcoes/logout.php')
+    }*/
+     
     //pegar verificação de cpf do cadastro do murillo
 
     require_once(__DIR__ . '/../../funcoes/conexao.php');

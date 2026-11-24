@@ -1,12 +1,16 @@
 <?php
-    //session_start();
-    //verificar id do user e se é adm
+    /*session_start();
+    
+    if($_SESSION['adm'] ==  false){
+     header('location:funcoes/logout.php')
+    }*/
 
     require_once(__DIR__ . '/../../funcoes/conexao.php');
 
     if(isset($_POST['cadastrar'])){
         $nome = $_POST['nome'];
         $descricao = $_POST['descricao'];
+        $resumo_descricao = $_POST['resumo_descricao'];
         $qntd = $_POST['qntd'];
         $preco_venda = $_POST['preco_venda'];
         $preco_custo = $_POST['preco_custo'];
@@ -41,17 +45,18 @@
             exit;
         }
 
-        if(empty($nome) || empty($descricao) || empty($qntd) || empty($preco_venda) || empty($preco_custo) || empty($tipo) || empty($id_categoria) || empty($img)){
+        if(empty($nome) || empty($descricao) || empty($resumo_descricao) || empty($qntd) || empty($preco_venda) || empty($preco_custo) || empty($tipo) || empty($id_categoria) || empty($img)){
             echo '<script>alert("Preencha todos os campos!")</script>';
             exit;
         }
         
         try{
-            $insert = "insert into produtos (nome,descricao,quantidade,preco_venda,preco_custo,tipo,id_categoria,img_url) values (:nome, :descricao, :qntd, :preco_venda, :preco_custo, :tipo, :id_categoria, :img_url);";
+            $insert = "insert into produtos (nome,descricao,resumo_descricao,quantidade,preco_venda,preco_custo,tipo,id_categoria,img_url) values (:nome, :descricao, :resumo_descricao, :qntd, :preco_venda, :preco_custo, :tipo, :id_categoria, :img_url);";
             $stmt = $pdo->prepare($insert);
             $stmt->execute([
                 ':nome' => $nome,
                 ':descricao' => $descricao,
+                ':resumo_descricao' => $resumo_descricao,
                 ':qntd' => $qntd,
                 ':preco_venda' => $preco_venda,
                 ':preco_custo' => $preco_custo,
@@ -100,6 +105,7 @@
         $id_produto = $_POST['id_produto'];
         $nome = $_POST['novo_nome'];
         $descricao = $_POST['nova_descricao'];
+        $resumo_descricao = $_POST['novo_resumo_descricao'];
         $qntd = $_POST['nova_qntd'];
         $preco_custo = $_POST['novo_preco_custo'];
         $preco_venda = $_POST['novo_preco_venda'];
@@ -140,13 +146,6 @@
 
                 $pastaDestino = __DIR__ . '/../../../front-end/img/produtos/';
 
-                /*if (move_uploaded_file($_FILES['img']['tmp_name'], $caminhoNovaImagem)) {
-                    $novaImagem = 'img/produtos/' . $nomeImagem;
-                } else {
-                    echo '<script>alert("Erro ao salvar a imagem!");</script>';
-                    exit;
-                }*/
-
                 if (move_uploaded_file($_FILES['img']['tmp_name'],$pastaDestino . $nomeImagem)) {
                     $img_url = 'img/produtos/' . $nomeImagem;
                 } else {
@@ -162,6 +161,7 @@
             $img_url = $novaImagem ?? $produtoAtual['img_url'];
 
             $update = "update produtos set nome = :nome, descricao = :descricao,
+                        resumo_descricao = :resumo_descricao,
                         quantidade = :qntd, preco_custo = :preco_custo, preco_venda = :preco_venda,
                         tipo = :tipo, id_categoria = :id_categoria, ativo = :ativo, img_url = :img_url
                         where id_produto = :id_produto";
@@ -169,6 +169,7 @@
             $stmt->execute([
                 ':nome' => $nome,
                 ':descricao' => $descricao,
+                ':resumo_descricao' => $resumo_descricao,
                 ':qntd' => $qntd,
                 ':preco_custo' => $preco_custo,
                 ':preco_venda' => $preco_venda,
@@ -243,7 +244,10 @@
                 <input type="text" id="nome" name="nome" required><br>
 
                 <label for="descricao">Digite a descrição:</label><br>
-                <input type="textarea" id="descricao" name="descricao" required><br>
+                <textarea id="descricao" name="descricao" required></textarea><br>
+
+                <label for="resumo_descricao">Digite um resumo da descrição:</label><br>
+                <input type="text" id="resumo_descricao" name="resumo_descricao" required><br>
 
                 <label for="qntd">Digite a quantidade:</label><br>
                 <input type="number" id="qntd" name="qntd" required><br>
@@ -279,6 +283,7 @@
                         <td>Imagem</td>
                         <td>Nome</td>
                         <td>Descrição</td>
+                        <td>Resumo da Descrição</td>
                         <td>Quantidade</td>
                         <td>Custo</td>
                         <td>Preço de Venda</td>
@@ -306,6 +311,7 @@
                             <td> <img src="../../../front-end/<?= htmlspecialchars($produto['img_url']) ?>" alt="Foto do produto <?= $produto['nome'] ?>"> </td>
                             <td> <?= htmlspecialchars($produto['nome']) ?> </td>
                             <td> <?= htmlspecialchars($produto['descricao']) ?> </td>
+                            <td> <?= htmlspecialchars($produto['resumo_descricao']) ?> </td>
                             <td> <?= htmlspecialchars($produto['quantidade']) ?> </td>
                             <td>R$ <?= number_format($produto['preco_custo'], 2, ',', '.') ?> </td>
                             <td>R$ <?= number_format($produto['preco_venda'], 2, ',', '.') ?> </td>
@@ -324,6 +330,7 @@
                                     data-id="<?= htmlspecialchars($produto['id_produto']) ?>"
                                     data-nome="<?= htmlspecialchars($produto['nome']) ?>"
                                     data-descricao="<?= htmlspecialchars($produto['descricao']) ?>"
+                                    data-resumo="<?= htmlspecialchars($produto['resumo_descricao']) ?>"
                                     data-qntd="<?= htmlspecialchars($produto['quantidade']) ?>"
                                     data-custo="<?= htmlspecialchars($produto['preco_custo']) ?>"
                                     data-venda="<?= htmlspecialchars($produto['preco_venda']) ?>"
@@ -352,7 +359,10 @@
                     <input type="text" id="editarNome" name="novo_nome" required><br>
 
                     <label for="editarDescricao">Digite a descrição:</label><br>
-                    <input type="textarea" id="editarDescricao" name="nova_descricao" required><br>
+                    <textarea id="editarDescricao" name="nova_descricao" required></textarea><br>
+
+                    <label for="editarResumo_descricao">Digite um resumo da descrição:</label><br>
+                    <input type="text" id="editarResumo_descricao" name="novo_resumo_descricao" required><br>
 
                     <label for="editarQntd">Digite a quantidade:</label><br>
                     <input type="number" id="editarQntd" name="nova_qntd" required><br>
@@ -404,6 +414,7 @@
                 document.getElementById('editarId').value = btn.dataset.id;
                 document.getElementById('editarNome').value = btn.dataset.nome;
                 document.getElementById('editarDescricao').value = btn.dataset.descricao;
+                document.getElementById('editarResumo_descricao').value = btn.dataset.resumo;
                 document.getElementById('editarQntd').value = btn.dataset.qntd;
                 document.getElementById('editarCusto').value = btn.dataset.custo;
                 document.getElementById('editarVenda').value = btn.dataset.venda;
