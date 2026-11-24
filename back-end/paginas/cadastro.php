@@ -117,6 +117,7 @@
     <title>Pettisco - Cadastro</title>
 </head>
 <body>
+    <?php require_once __DIR__ . '/../componentes/header.php'; ?>
     <main class="cadastro">
         <section class="painel-esquerdo">
             <section class="conteudo">
@@ -260,5 +261,6 @@
     </script>
 
 
+    <?php require_once __DIR__ . '/../componentes/footer.php'; ?>
 </body>
 </html>

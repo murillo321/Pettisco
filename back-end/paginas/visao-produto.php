@@ -75,6 +75,7 @@ if (isset($_POST['adicionar_sacola'])) {
     <title>Pettisco - <?php echo htmlspecialchars($infoProduto['nome']); ?></title>
 </head>
 <body>
+    <?php require_once __DIR__ . '/../componentes/header.php'; ?>
     <?php
         if ($infoProduto['ativo'] == 1){
         
@@ -119,7 +120,7 @@ if (isset($_POST['adicionar_sacola'])) {
         const diminuir = document.getElementById('diminuir');
         const aumentar = document.getElementById('aumentar');
         const mensagem = document.getElementById('mensagem-sacola');
-        if(mensagem != '') {
+        if (mensagem) {
             mensagem.style.color = 'green';
         }
 
@@ -139,5 +140,6 @@ if (isset($_POST['adicionar_sacola'])) {
             });
         }
     </script>
+    <?php require_once __DIR__ . '/../componentes/footer.php'; ?>
 </body>
 </html>
