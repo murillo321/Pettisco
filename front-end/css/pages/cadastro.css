@@ -247,7 +247,7 @@ body {
     background-color: var(--laranja);
 }
 
-.cadastro :focus-visible {
+.cadastro :focus-visible:not(input) {
     outline: 3px solid var(--laranja);
     outline-offset: 3px;
 }

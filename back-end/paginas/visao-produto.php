@@ -29,17 +29,17 @@ if (!$infoProduto) {
     exit();
 }
 
-$mensagemSacola = '';
+$mensagemCarrinho = '';
 
-if (isset($_POST['adicionar_sacola'])) {
+if (isset($_POST['adicionar_carrinho'])) {
     $quantidade = filter_input(INPUT_POST, 'quantidade', FILTER_VALIDATE_INT);
     $estoque = (int) $infoProduto['quantidade'];
 
     if ($quantidade === false || $quantidade < 1) {
-        $mensagemSacola = 'Informe uma quantidade válida.';
+        $mensagemCarrinho = 'Informe uma quantidade válida.';
         header('Location:visao-produtophp?produto=1');
     } elseif ($quantidade > $estoque) {
-        $mensagemSacola = 'Quantidade maior que o estoque disponível.';
+        $mensagemCarrinho = 'Quantidade maior que o estoque disponível.';
     } else {
         if (!isset($_SESSION['carrinho'])) {
             $_SESSION['carrinho'] = [];
@@ -49,14 +49,19 @@ if (isset($_POST['adicionar_sacola'])) {
         $novaQuantidade = $quantidadeAtual + $quantidade;
 
         if ($novaQuantidade > $estoque) {
-            $mensagemSacola = 'A quantidade total na sacola excede o estoque disponível.';
+            $mensagemCarrinho = 'A quantidade total no carrinho excede o estoque disponível.';
         } else {
             $_SESSION['carrinho'][$idProduto] = [
+                'img_url' => $infoProduto['img_url'],
                 'nome' => $infoProduto['nome'],
                 'preco' => $infoProduto['preco_venda'],
+                'quantidade_disponivel' => $infoProduto['quantidade'],
                 'quantidade' => $novaQuantidade,
             ];
-            $mensagemSacola = 'Produto adicionado à sacola.';
+            $mensagemCarrinho = 'Produto adicionado ao carrinho.';
+            $_SESSION['quantidade_carrinho'] = array_sum(
+                array_map('intval', array_column($_SESSION['carrinho'], 'quantidade'))
+            );
         }
     }
 }
@@ -100,12 +105,12 @@ if (isset($_POST['adicionar_sacola'])) {
                 <button type="button" id="diminuir">-</button>
                 <input type="number" id="quantidade" name="quantidade" value="1" min="1" max="<?php echo (int) $infoProduto['quantidade']; ?>" required >
                 <button type="button" id="aumentar">+</button>
-                <button type="submit" name="adicionar_sacola" value="1">
-                    Adicionar à sacola
+                <button type="submit" name="adicionar_carrinho" value="1">
+                    Adicionar à carrinho
                 </button>
             </form>
-            <?php if ($mensagemSacola !== ''): ?>
-                <p id="mensagem-sacola"><?php echo htmlspecialchars($mensagemSacola); ?></p>
+            <?php if ($mensagemCarrinho !== ''): ?>
+                <p id="mensagem-carrinho"><?php echo htmlspecialchars($mensagemCarrinho); ?></p>
             <?php endif; ?>
         </section>
     <?php
@@ -119,7 +124,7 @@ if (isset($_POST['adicionar_sacola'])) {
         const quantidade = document.getElementById('quantidade');
         const diminuir = document.getElementById('diminuir');
         const aumentar = document.getElementById('aumentar');
-        const mensagem = document.getElementById('mensagem-sacola');
+        const mensagem = document.getElementById('mensagem-carrinho');
         if (mensagem) {
             mensagem.style.color = 'green';
         }

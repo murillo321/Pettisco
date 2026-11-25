@@ -77,7 +77,7 @@
                         $_SESSION['cadastro_concluido'] = true;
                         $_SESSION['id_user'] = $dadosCpf['id_user'];
                         if($dadosCpf['adm'] == true) {
-                            $_SESSION['adm'] == true;
+                            $_SESSION['adm'] = true;
                             header('Location:/adm/adm.php');
                         } else{
                             header('Location: home.php');
@@ -118,7 +118,6 @@
 
 </head>
 <body>
-    <?php require_once __DIR__ . '/../componentes/header.php'; ?>
     <main class="login">
         <section class="painel-esquerdo">
             <section class="conteudo">
@@ -173,6 +172,5 @@
             alternarSenha.setAttribute("aria-label", mostrarSenha ? "Ocultar senha" : "Mostrar senha");
         });
     </script>
-    <?php require_once __DIR__ . '/../componentes/footer.php'; ?>
 </body>
 </html>

@@ -17,7 +17,7 @@
 .site-footer img { width: 150px; height: 60px; object-fit: contain; }
 .site-footer p { margin: 0; }
 .site-footer small { font-size: 12px; }
-.site-footer :focus-visible { outline: 3px solid var(--laranja); outline-offset: 4px; }
+.site-footer :focus-visible:not(input) { outline: 3px solid var(--laranja); outline-offset: 4px; }
 @media (max-width: 600px) {
     .site-footer__conteudo { flex-direction: column; text-align: center; }
 }

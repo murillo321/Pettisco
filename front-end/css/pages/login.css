@@ -221,7 +221,7 @@
     text-underline-offset: 4px;
 }
 
-.login :focus-visible {
+.login :focus-visible:not(input) {
     outline: 3px solid var(--azul);
     outline-offset: 3px;
 }

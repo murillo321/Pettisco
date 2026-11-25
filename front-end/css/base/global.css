@@ -7,6 +7,7 @@
 html,
 body {
     min-height: 100%;
+    background-color: var(--beje);
 }
 
 html {
@@ -65,7 +66,11 @@ table {
     display: none !important;
 }
 
-:focus-visible {
+:focus-visible:not(input) {
     outline: 3px solid #2563eb;
     outline-offset: 2px;
+}
+
+input:focus-visible {
+    outline: none;
 }
