@@ -1,11 +1,11 @@
 <?php
-    /*session_start();
-    
-    if($_SESSION['adm'] ==  false){
-     header('location:funcoes/logout.php')
-    }*/
+    session_start();
+    $id_user = $_SESSION['id_user'];
 
     require_once(__DIR__ . '/../../funcoes/conexao.php');
+    require_once('../../funcoes/funcoesadm.php');
+
+    verificaradm($pdo, $id_user);
 
     if(isset($_POST['cadastrar_raca'])){
         $nome_raca = $_POST['nome_raca'];
@@ -162,7 +162,7 @@
     }
 
     try{
-        $select_racas = "select r.*, e.nome_especie, p.nome_porte from raca r inner join especie e on r.id_especie = e.id_especie inner join porte p on r.id_porte = p.id_porte order by id_raca;"; //puxar porte tambem
+        $select_racas = "select r.*, e.nome_especie, p.nome_porte from raca r inner join especie e on r.id_especie = e.id_especie inner join porte p on r.id_porte = p.id_porte order by id_raca;";
         $stmt = $pdo->prepare($select_racas);
         $stmt->execute();
         $racas = $stmt->fetchAll(PDO::FETCH_ASSOC);

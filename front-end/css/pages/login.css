@@ -1,0 +1,292 @@
+.login {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 100vh;
+    overflow: hidden;
+    background-color: var(--beje);
+}
+
+.login .painel-esquerdo {
+    display: flex;
+    align-items: center;
+    padding: var(--espaco-painel);
+    background-color: var(--azul);
+    color: var(--branco);
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath fill='white' d='M0 0H87.5C84.5 10 82.5 20 82.5 30C82.5 46 87.5 61 87.5 77C87.5 86 86.5 94 84.5 100H0Z'/%3E%3C/svg%3E");
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath fill='white' d='M0 0H87.5C84.5 10 82.5 20 82.5 30C82.5 46 87.5 61 87.5 77C87.5 86 86.5 94 84.5 100H0Z'/%3E%3C/svg%3E");
+    mask-repeat: no-repeat;
+    mask-size: 100% 100%;
+}
+
+.login .painel-esquerdo .conteudo {
+    width: 72%;
+    max-width: 560px;
+    margin: 0 auto;
+    transform: translateY(-51px);
+}
+
+.login .logo {
+    display: block;
+    width: auto;
+    height: 90px;
+    max-width: 100%;
+    object-fit: contain;
+    object-position: left center;
+}
+
+.login .titulo-esquerdo {
+    margin: 76px 0 20px;
+    font-size: 68px;
+    line-height: 1;
+}
+
+.login .destaque {
+    color: var(--outrolaranja);
+}
+
+.login .painel-esquerdo .conteudo > p {
+    max-width: 390px;
+    margin: 0;
+    font-size: 20px;
+    line-height: 1.5;
+}
+
+.login .painel-direito {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 56px 30px 56px 54px;
+    color: var(--cinza);
+}
+
+.login-cabecalho,
+.login form {
+    width: 100%;
+    max-width: 500px;
+}
+
+.login-cabecalho {
+    margin-bottom: 32px;
+}
+
+.login-cabecalho h1 {
+    margin: 0 0 var(--espaco-minimo);
+    font-size: 48px;
+    line-height: 1.1;
+}
+
+.login-cabecalho .destaque {
+    color: var(--azul);
+}
+
+.login-cabecalho p {
+    margin: 0;
+    font-size: 18px;
+    line-height: 1.45;
+}
+
+.login form {
+    display: grid;
+    gap: 20px;
+}
+
+.campo-login label {
+    display: block;
+    margin-bottom: var(--espaco-pequeno);
+    font-size: var(--tamanho-texto);
+    font-weight: 700;
+}
+
+.campo-com-icone {
+    position: relative;
+}
+
+.campo-com-icone .user-lucide {
+    position: absolute;
+    top: 50%;
+    left: var(--espaco-padrao);
+    transform: translateY(-50%);
+    color: var(--azul);
+}
+
+.campo-login input:not([type="submit"]) {
+    width: 100%;
+    min-width: 0;
+    height: var(--altura-input);
+    padding: var(--espaco-padrao) 52px;
+    border: 1px solid var(--outrobeje);
+    border-radius: var(--raio-grande);
+    background-color: var(--branco);
+    color: var(--cinza);
+    font-size: var(--tamanho-texto);
+}
+
+.campo-login input::placeholder {
+    color: var(--cinza);
+    opacity: 0.65;
+}
+
+.login #alerta-cpf {
+    margin: var(--espaco-pequeno) 0 0;
+    font-size: var(--tamanho-texto-pequeno);
+    line-height: 1.4;
+}
+
+.login #alerta-cpf:empty {
+    display: none;
+}
+
+.eye {
+    position: absolute;
+    top: 50%;
+    right: var(--espaco-minimo);
+    display: grid;
+    place-items: center;
+    width: var(--tamanho-icone);
+    height: var(--tamanho-icone);
+    padding: 0;
+    transform: translateY(-50%);
+    border: 0;
+    border-radius: var(--raio-pequeno);
+    background-color: var(--branco);
+    color: var(--azul);
+}
+
+.eye:hover {
+    background-color: var(--beje);
+}
+
+.eye svg {
+    width: 20px;
+    height: 20px;
+}
+
+.eye svg:last-child,
+.eye.is-visible svg:first-child {
+    display: none;
+}
+
+.eye.is-visible svg:last-child {
+    display: block;
+}
+
+.login input[type="submit"] {
+    width: 100%;
+    min-height: 60px;
+    margin-top: var(--espaco-pequeno);
+    padding: var(--espaco-medio) var(--espaco-grande);
+    border: 0;
+    border-radius: 24px;
+    background-color: var(--outrolaranja);
+    color: var(--cinza);
+    font-size: 20px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.login input[type="submit"]:hover {
+    background-color: var(--laranja);
+}
+
+.login-divisor {
+    display: flex;
+    align-items: center;
+    gap: var(--espaco-padrao);
+    color: var(--cinza);
+    font-size: var(--tamanho-texto-pequeno);
+}
+
+.login-divisor::before,
+.login-divisor::after {
+    height: 1px;
+    flex: 1;
+    background-color: var(--outrobeje);
+    content: "";
+}
+
+.login-cadastro {
+    margin: 0;
+    text-align: center;
+    font-size: 18px;
+}
+
+.login-cadastro a {
+    display: inline-block;
+    margin-left: var(--espaco-minimo);
+    color: var(--azul);
+    font-weight: 700;
+    text-underline-offset: 4px;
+}
+
+.login :focus-visible {
+    outline: 3px solid var(--azul);
+    outline-offset: 3px;
+}
+
+@media (max-width: 1100px) and (min-width: 761px) {
+    .login .painel-esquerdo {
+        padding: var(--espaco-grande);
+    }
+
+    .login .painel-esquerdo .conteudo {
+        width: 88%;
+        transform: translateY(-48px);
+    }
+
+    .login .titulo-esquerdo {
+        font-size: var(--tamanho-titulo);
+    }
+
+    .login-cabecalho h1 {
+        font-size: 36px;
+    }
+
+    .login .painel-direito {
+        align-items: center;
+        padding: var(--espaco-grande);
+    }
+}
+
+@media (max-width: 760px) {
+    .login {
+        grid-template-columns: 1fr;
+        overflow: visible;
+    }
+
+    .login .painel-esquerdo {
+        min-height: auto;
+        padding: var(--espaco-grande);
+        -webkit-mask-image: none;
+        mask-image: none;
+    }
+
+    .login .painel-esquerdo .conteudo {
+        width: 100%;
+        max-width: 520px;
+        transform: none;
+    }
+
+    .login .logo {
+        height: var(--altura-logo-mobile);
+    }
+
+    .login .titulo-esquerdo {
+        margin-top: var(--espaco-grande);
+        font-size: var(--tamanho-boas-vindas-mobile);
+    }
+
+    .login .painel-esquerdo .conteudo > p {
+        font-size: var(--tamanho-texto);
+    }
+
+    .login .painel-direito {
+        padding: var(--espaco-grande) var(--espaco-padrao) 48px;
+    }
+
+    .login-cabecalho h1 {
+        font-size: 36px;
+    }
+}

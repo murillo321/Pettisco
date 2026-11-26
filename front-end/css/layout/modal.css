@@ -1,0 +1,26 @@
+dialog {
+    margin: auto;
+}
+
+#modal-erro-senha {
+    max-width: min(var(--largura-modal), calc(100% - var(--espaco-padrao) * 2));
+    padding: var(--espaco-painel);
+    border: 2px solid var(--azul);
+    border-radius: var(--raio-grande);
+    background-color: var(--beje);
+    color: var(--cinza);
+    line-height: 1.5;
+}
+
+#modal-erro-senha h2 {
+    margin-top: 0;
+}
+
+#modal-erro-senha button {
+    padding: var(--espaco-medio) var(--espaco-grande);
+    border: 0;
+    border-radius: var(--raio-pequeno);
+    background-color: var(--laranja);
+    color: var(--cinza);
+    font-weight: 700;
+}

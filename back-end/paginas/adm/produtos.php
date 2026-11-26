@@ -1,11 +1,11 @@
 <?php
-    /*session_start();
-    
-    if($_SESSION['adm'] ==  false){
-     header('location:funcoes/logout.php')
-    }*/
+    session_start();
+    $id_user = $_SESSION['id_user'];
 
     require_once(__DIR__ . '/../../funcoes/conexao.php');
+    require_once('../../funcoes/funcoesadm.php');
+
+    verificaradm($pdo, $id_user);
 
     if(isset($_POST['cadastrar'])){
         $nome = $_POST['nome'];

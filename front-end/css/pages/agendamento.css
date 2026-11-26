@@ -1,0 +1,174 @@
+.container {
+    width: 90%;
+    max-width: 900px;
+    margin: 50px auto;
+}
+
+.container h1 {
+    margin-bottom: 10px;
+}
+
+.container p {
+    color: #777;
+    margin-bottom: 30px;
+}
+
+.calendario {
+    background-color: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+}
+
+.calendario-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 25px;
+}
+
+.calendario-header a {
+    text-decoration: none;
+    color: #333;
+    font-size: 22px;
+    padding: 8px 12px;
+    border-radius: 6px;
+}
+
+.calendario-header a:hover {
+    background-color: #eee;
+}
+
+.dias-semana,.dias {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+}
+
+.dias-semana {
+    margin-bottom: 12px;
+}
+
+.dias-semana span {
+    text-align: center;
+    font-weight: bold;
+    color: #777;
+}
+
+.dia {
+    min-height: 65px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.vazio {
+    background: transparent;
+}
+
+.indisponivel {
+    background-color: #eee;
+    color: #aaa;
+}
+
+.disponivel {
+    background-color: #e2f5e8;
+    color: #258344;
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.disponivel:hover {
+    background-color: #258344;
+    color: white;
+}
+
+@media (max-width: 600px) {
+    .container {
+        width: 95%;
+        margin: 25px auto;
+    }
+
+    .calendario {
+        padding: 12px;
+    }
+
+    .dias-semana,.dias {
+        gap: 5px;
+    }
+
+    .dia {
+        min-height: 45px;
+        font-size: 14px;
+    }
+}
+
+.modal-horarios {
+    border: none;
+    border-radius: 12px;
+    padding: 0;
+    width: 90%;
+    max-width: 450px;
+    margin: auto;
+}
+
+.modal-horarios::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.modal-conteudo {
+    padding: 30px;
+    position: relative;
+}
+
+.modal-conteudo h2 {
+    margin-bottom: 10px;
+}
+
+#dataSelecionada {
+    color: #777;
+    margin-bottom: 20px;
+}
+
+.fechar-modal {
+    position: absolute;
+    top: 12px;
+    right: 15px;
+    border: none;
+    background: none;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+.lista-horarios {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.horario {
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.horario-livre {
+    background: #e2f5e8;
+    color: #258344;
+    cursor: pointer;
+}
+
+.horario-livre:hover {
+    background: #258344;
+    color: white;
+}
+
+.horario-ocupado {
+    background: #eee;
+    color: #999;
+    cursor: not-allowed;
+}

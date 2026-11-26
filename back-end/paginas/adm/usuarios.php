@@ -1,18 +1,29 @@
 <?php
-    /*session_start();
-    
-    if($_SESSION['adm'] ==  false){
-     header('location:funcoes/logout.php')
-    }*/
-     
-    //pegar verificação de cpf do cadastro do murillo
+    session_start();
+    $id_user = $_SESSION['id_user'];
 
     require_once(__DIR__ . '/../../funcoes/conexao.php');
+    require_once('../../funcoes/funcoesadm.php');
+
+    verificaradm($pdo, $id_user);
 
     if(isset($_POST['cadastrar'])){
         $nome = $_POST['nome'];
         $email = $_POST['email'];
         $cpf = $_POST['cpf'];
+
+        $cpf = preg_replace('/[^0-9]/is', '', $cpf);
+        $cpfFormatado = '';
+        for ($i = 0; $i < strlen($cpf); $i++) {
+            $cpfFormatado .= $cpf[$i];
+
+            if ($i === 2 || $i === 5) {
+                $cpfFormatado .= '.';
+            } elseif ($i === 8) {
+                $cpfFormatado .= '-';
+            }
+        }
+
         $senha = $_POST['senha'];
 
         $senha_hash = password_hash($senha, PASSWORD_DEFAULT);
@@ -113,6 +124,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../front-end/css/main.css">
+    <link rel="shortcut icon" href="../../../front-end/img/logos/favicon.ico" type="image/x-icon"> 
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
     <title>Pettisco - Usuários</title>
 </head>
 <body>
@@ -146,6 +160,7 @@
                 <thead>
                     <tr>
                         <td>ID</td>
+                        <td>Foto</td>
                         <td>Nome</td>
                         <td>Email</td>
                         <td>CPF</td>
@@ -158,6 +173,13 @@
                     <?php foreach ($usuarios as $usuario): ?>
                         <tr>
                             <td> <?= htmlspecialchars($usuario['id_user']) ?> </td>
+                            <td>
+                                <?php if($usuario['foto_url'] == null): ?>
+                                    <img src="../../../front-end/img/perfil/usuario/usuario-sem-foto.png">
+                                <?php else:?>
+                                    <img src="../../../front-end/<?= htmlspecialchars($usuario['foto_url']) ?>" alt="Foto do usuario <?= $usuario['username'] ?>">
+                                <?php endif; ?>
+                            </td>
                             <td> <?= htmlspecialchars($usuario['username']) ?> </td>
                             <td> <?= htmlspecialchars($usuario['email']) ?> </td>
                             <td> <?= htmlspecialchars($usuario['cpf']) ?> </td>
@@ -202,6 +224,20 @@
         </section>
         
     </main>
+    <script>
+        lucide.createIcons();
+
+        const quantidade = document.getElementById("quantidade");
+        const maiuscula = document.getElementById("maiuscula");
+        const numeros = document.getElementById("numeros");
+        const especiais = document.getElementById("especiais");
+        const alertaSenha = document.getElementById("alerta-senha");
+        const formulario = document.querySelector('form[name="cadastro"]');
+        const modalErroSenha = document.getElementById("modal-erro-senha");
+        const mensagemErroSenha = document.getElementById("mensagem-erro-senha");
+    </script>
     <script src="../../../front-end/js/abrir-modais.js"></script>
+    <script src="../../../front-end/js/validacao-cadastro.js"></script>
+    <script src="../../../front-end/js/validar-cpf.js"></script>
 </body>
 </html>
