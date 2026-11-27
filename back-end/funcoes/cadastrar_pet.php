@@ -10,7 +10,7 @@
     if(isset($_POST['cadastrar_pet'])){
         $nome = $_POST['nome_pet'];
         $especie = $_POST['especie_pet'];
-        $raca = $_POST['raca_pet'];
+        $id_raca = !empty($_POST['raca']) ? $_POST['raca'] : null;
         $peso = $_POST['peso_pet']; 
 
         $foto_pet = null;
@@ -53,7 +53,7 @@
             echo 'Erro ao receber imagem: '. $e->getMessage();
         }
 
-        if(empty($nome) || empty($especie) || empty($raca) || empty($peso)){
+        if(empty($nome) || empty($peso)){
             echo '<script>alert("Preencha todos os campos!")</script>';
             exit;
         }

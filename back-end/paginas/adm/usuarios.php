@@ -150,7 +150,16 @@
                 <label for="cpf">Digite o CPF:</label><br>
                 <input type="text" id="cpf" name="cpf" maxlength="14" required><br>
                 <label for="senha">Digite a senha:</label><br>
-                <input type="password" id="senha" name="senha" minlength="8" placeholder="Mínimo de 8 caracteres" required><br><br>
+                <input type="password" id="senha" name="senha" minlength="8" placeholder="Mínimo de 8 caracteres" required><br>
+                <section class="requisitos-senha">
+                    <p>A senha deve conter:</p>
+                    <ul class="rules" id="rules">
+                        <li id="quantidade">8+ caracteres</li>
+                        <li id="maiuscula">Uma letra maiúscula</li>
+                        <li id="numeros">Um número</li>
+                        <li id="especiais">Um caractere especial</li>
+                    </ul>
+                </section>
                 <input type="submit" name="cadastrar" value="Cadastrar">
             </form>
         </dialog>

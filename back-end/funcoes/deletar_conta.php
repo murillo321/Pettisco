@@ -1,12 +1,20 @@
 <?php
     session_start();
     if (!isset($_SESSION['cadastro_concluido'])) {
-        header("location:login.php");
+        header("location:../paginas/login.php");
         exit();
     }
     $idUser = $_SESSION['id_user'];
-    require_once('../funcoes/conexao.php');
+    require_once('conexao.php');
 
-    echo "<script>confirm('Você realmente deseja excluir sua conta?')</script>";
+    try{
+        $delete = "delete from user where id_user = :id_user;";
+        $stmt = $pdo->prepare($delete);
+        $stmt->execute([':id_user' => $idUser]);
 
+        session_destroy();
+        header('location: ../paginas/cadastro.php');
+    } catch (PDOException $e){
+        echo 'Erro ao excluir: ' . $e->getMessage();
+    }
 ?>

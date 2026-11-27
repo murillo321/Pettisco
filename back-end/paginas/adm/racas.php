@@ -130,10 +130,6 @@
         $id_especie = $_POST['id_especie'];
         $novo_nome_especie = $_POST['novo_nome_especie'];
 
-        if(empty($novo_nome_especie)){
-            $novo_nome_especie = $_POST['novo_nome_especie'];
-        }
-
         try {
             $busca_especie = 'select nome_especie from especie where id_especie = :id_especie;';
             $stmt = $pdo->prepare($busca_especie);
@@ -186,6 +182,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../front-end/css/main.css">
+    <link rel="shortcut icon" href="../../../front-end/img/logos/favicon.ico" type="image/x-icon"> 
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
     <title>Pettisco - Raças e Espécies</title>
 </head>
 <body>
@@ -377,6 +376,8 @@
         
     </main>
     <script>
+        lucide.createIcons();
+
         const btnAbrirCadastroEspecie = document.getElementById('abrirCadastroEspecie');
         const cadastroEspecie = document.getElementById('cadastroEspecie');
         const btnFecharCadastroEspecie = document.getElementById('fecharCadastroEspecie');
