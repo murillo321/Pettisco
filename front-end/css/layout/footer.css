@@ -5,7 +5,7 @@
     color: var(--branco);
     line-height: 1.5;
 }
-.site-footer__conteudo {
+.site-footer-conteudo {
     max-width: 1392px;
     margin: auto;
     display: flex;
@@ -19,5 +19,5 @@
 .site-footer small { font-size: 12px; }
 .site-footer :focus-visible:not(input) { outline: 3px solid var(--laranja); outline-offset: 4px; }
 @media (max-width: 600px) {
-    .site-footer__conteudo { flex-direction: column; text-align: center; }
+    .site-footer-conteudo { flex-direction: column; text-align: center; }
 }

@@ -248,11 +248,11 @@
                 <label for="qntd">Digite a quantidade:</label><br>
                 <input type="number" id="qntd" name="qntd" required><br>
 
-                <label for="preco_custo">Digite o custo:</label><br><!--talvez fazer um js maneiro pra deixar como money-->
-                <input type="number" step="0.01" id="preco_custo" name="preco_custo" required><br>
+                <label for="preco-custo">Digite o custo:</label><br><!--talvez fazer um js maneiro pra deixar como money-->
+                <input type="number" step="0.01" id="preco-custo" name="preco_custo" required><br>
 
-                <label for="preco_venda">Digite o preço de venda:</label><br><!--talvez fazer um js maneiro pra deixar como money-->
-                <input type="number" step="0.01" id="preco_venda" name="preco_venda" required><br>
+                <label for="preco-venda">Digite o preço de venda:</label><br><!--talvez fazer um js maneiro pra deixar como money-->
+                <input type="number" step="0.01" id="preco-venda" name="preco_venda" required><br>
 
                 <label for="tipo">Digite o tipo:</label><br>
                 <input type="text" id="tipo" name="tipo" required><br>

@@ -1,4 +1,5 @@
 :root {
+    /*Cores para usar dentro das páginas*/
     --azul: #0B3C49;
     --laranja: #Ff9f1c;
     --outrolaranja: #ff7b00;
@@ -6,6 +7,7 @@
     --beje-claro: #fffcf6;
     --outrobeje: #E8DFD1;
     --cinza: #252525;
+    --preto: #191918;
     --branco: #fff;
     --cinza-claro: #dadada;
 

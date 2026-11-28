@@ -37,7 +37,7 @@ if(abrirmodal2){
 
 //Filtragem
 const ordem = document.getElementById('ordem');
-const listaAdm = document.getElementById('lista_adm');
+const listaAdm = document.getElementById('lista-adm');
 
 ordem.addEventListener('change', async () => {
     const resposta = await fetch('filtrar_adm.php?ordem='+ordem.value);

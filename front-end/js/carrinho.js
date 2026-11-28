@@ -1,109 +1,75 @@
 const mensagemCarrinho = document.getElementById('mensagem-carrinho');
-const contadorCarrinho = document.querySelector('.site-header__contador');
+const contadorCarrinho = document.querySelector('.site-header-contador');
+const controles = document.querySelectorAll('.carrinho-form-quantidade input[type="number"], .carrinho-form-quantidade button');
 
-function exibirMensagem(texto, sucesso) {
+function exibirMensagem(texto) {
     mensagemCarrinho.textContent = texto;
     mensagemCarrinho.hidden = false;
-    mensagemCarrinho.className = `carrinho__mensagem carrinho__mensagem--${sucesso ? 'sucesso' : 'erro'}`;
+    mensagemCarrinho.className = 'carrinho-mensagem carrinho-mensagem-erro';
 }
 
-document.querySelectorAll('.carrinho__form-quantidade').forEach((form) => {
+document.querySelectorAll('.carrinho-form-quantidade').forEach((form) => {
     const quantidade = form.querySelector('input[name="quantidade"]');
     const diminuir = form.querySelector('[data-quantidade="diminuir"]');
     const aumentar = form.querySelector('[data-quantidade="aumentar"]');
-    const subtotal = form.closest('.carrinho__item').querySelector('.carrinho__subtotal');
+    const subtotal = form.closest('.carrinho-item').querySelector('.carrinho-subtotal');
+
     let quantidadeSalva = quantidade.value;
-    let temporizador;
-    let revisao = 0;
 
-    function atualizarPrevia() {
-        let contadorPrevio = 0;
-        document.querySelectorAll('.carrinho__form-quantidade input[name="quantidade"]').forEach((input) => {
-            contadorPrevio += Number(input.value) || 0;
-        });
-        if (contadorCarrinho) {
-            contadorCarrinho.textContent = contadorPrevio;
-        }
-
-        const subtotalPrevio = Number(form.dataset.preco) * Number(quantidade.value);
-        subtotal.textContent = `Subtotal: R$ ${subtotalPrevio.toLocaleString('pt-BR', {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2,
-        })}`;
-    }
-
-    async function salvarQuantidade(revisaoRequisicao) {
-        if (!quantidade.value || !quantidade.checkValidity()) {
-            quantidade.reportValidity();
+    async function salvarQuantidade() {
+        if (!quantidade.reportValidity()) {
             return;
         }
+
+        const dados = new FormData(form);
+        controles.forEach(controle => controle.disabled = true);
 
         try {
             const resposta = await fetch(window.location.href, {
                 method: 'POST',
-                headers: { 'X-Requested-With': 'XMLHttpRequest' },
-                body: new FormData(form),
+                body: dados
             });
+
             const resultado = await resposta.json();
-            if (revisaoRequisicao !== revisao) {
-                return;
-            }
 
             if (!resposta.ok || !resultado.sucesso) {
                 quantidade.value = quantidadeSalva;
-                atualizarPrevia();
-                exibirMensagem(resultado.mensagem || 'Não foi possível atualizar a quantidade.', false);
+                exibirMensagem(resultado.mensagem || 'Erro ao atualizar quantidade.');
                 return;
             }
 
-            quantidadeSalva = String(resultado.quantidade);
+            quantidadeSalva = resultado.quantidade;
             quantidade.value = quantidadeSalva;
             subtotal.textContent = `Subtotal: R$ ${resultado.subtotal}`;
+
             if (contadorCarrinho) {
                 contadorCarrinho.textContent = resultado.contador;
             }
-            exibirMensagem(resultado.mensagem, true);
+
+            mensagemCarrinho.hidden = true;
         } catch (erro) {
-            if (revisaoRequisicao !== revisao) {
-                return;
-            }
-            console.error(erro);
             quantidade.value = quantidadeSalva;
-            atualizarPrevia();
-            exibirMensagem('Erro ao salvar a quantidade. Tente novamente.', false);
+            exibirMensagem('Erro ao atualizar a quantidade.');
+            console.error(erro);
+        } finally {
+            controles.forEach(controle => controle.disabled = false);
         }
     }
 
-    function agendarAtualizacao() {
-        clearTimeout(temporizador);
-        revisao += 1;
-        if (!quantidade.value || !quantidade.checkValidity()) {
-            return;
-        }
+    quantidade.addEventListener('change', salvarQuantidade);
 
-        atualizarPrevia();
-        temporizador = setTimeout(() => salvarQuantidade(revisao), 300);
-    }
-
-    quantidade.addEventListener('input', agendarAtualizacao);
     form.addEventListener('submit', (evento) => {
         evento.preventDefault();
-        agendarAtualizacao();
+        salvarQuantidade();
     });
 
     diminuir.addEventListener('click', () => {
-        const minimo = Number(quantidade.min);
-        const maximo = Number(quantidade.max);
-        const atual = Number(quantidade.value) || minimo;
-        quantidade.value = Math.max(minimo, Math.min(maximo, atual - 1));
-        agendarAtualizacao();
+        quantidade.stepDown();
+        salvarQuantidade();
     });
 
     aumentar.addEventListener('click', () => {
-        const minimo = Number(quantidade.min);
-        const maximo = Number(quantidade.max);
-        const atual = Number(quantidade.value) || minimo;
-        quantidade.value = Math.max(minimo, Math.min(maximo, atual + 1));
-        agendarAtualizacao();
+        quantidade.stepUp();
+        salvarQuantidade();
     });
 });

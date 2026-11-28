@@ -87,7 +87,7 @@
 </head>
 <body>
     <section class="separar">
-        <button id="abrir_modal" onclick="abrir_modal()" class="gerar-convite">Gerar código de convite</button>
+        <button id="abrir-modal" onclick="abrir_modal()" class="gerar-convite">Gerar código de convite</button>
         <form name="filtro">
             <select name="ordem" id="ordem">
                 <option value="nome_asc">Nome (A - Z)</option>
@@ -110,16 +110,16 @@
             </section>
             <section class="separar">
                 <input type="submit" value="Gerar convite" name="convite">
-                <button id="fechar_modal" onclick="fechar_modal()">Cancelar</button>
+                <button id="fechar-modal" onclick="fechar_modal()">Cancelar</button>
             </section>
         </form>
     </dialog>
     <dialog id="modal2">
         <p>Token gerado é:<?php echo $token; ?></p>
-        <button id="fechar_modal" onclick="fechar_modal2()">Fechar</button>
+        <button id="fechar-modal" onclick="fechar_modal2()">Fechar</button>
     </dialog>
     <section class="centralizar">
-        <section class="painel" id="lista_adm">
+        <section class="painel" id="lista-adm">
             <section class="header-perfil">
                 <p>Foto</p>
                 <p>Nome</p>
